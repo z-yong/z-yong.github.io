@@ -1,0 +1,32 @@
+<?xml version="1.0" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd" >
+<!--
+2013-9-30: Created.
+-->
+<svg>
+<metadata>
+Created by iconfont
+</metadata>
+<defs>
+
+<font id="iconfont" horiz-adv-x="1024" >
+  <font-face
+    font-family="iconfont"
+    font-weight="500"
+    font-stretch="normal"
+    units-per-em="1024"
+    ascent="896"
+    descent="-128"
+  />
+    <missing-glyph />
+    
+    <glyph glyph-name="dian" unicode="&#58953;" d="M512 256.56888889000004a127.43111111 127.43111111 0 1 1 0 254.86222222 127.43111111 127.43111111 0 0 1 0-254.86222222z"  horiz-adv-x="1024" />
+
+    
+    <glyph glyph-name="xian-quan-kongxindian" unicode="&#59063;" d="M512 128c-141.2 0-256 114.8-256 256s114.8 256 256 256 256-114.8 256-256c-0.4-141.2-114.8-255.6-256-256z m0 448c-106 0-192-86-192-192s86-192 192-192 192 86 192 192c-0.4 106-86 191.6-192 192z"  horiz-adv-x="1024" />
+
+    
+
+
+  </font>
+</defs></svg>
