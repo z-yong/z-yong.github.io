@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>canvas实现刮刮乐</title>
+  <style>
+    canvas {
+      /* background: url('./img/no.png') no-repeat; */
+      width: 400px;
+      height: 400px;
+    }
+  </style>
+</head>
+
+<body>
+  <!-- canvas画布会失真 它画的每一条线都会在两个像素中间 分别取两个像素的一半 由于不存在 另外的0.5 个像素 所以放大时会失真 
+        要想解决这个问题 可以在行内宽度和高度设置你想展示的大小的两倍 然后在css中将其宽度设置为行内宽高度的一半就可以
+    注意: 行内的单位都是相对单位 其中所画的图形大小都必须是相对值 -->
+  <canvas width="400" height="400"></canvas>
+  <script>
+    // 需求:
+    // 1、可刮开蒙层看到背景图片
+    // 2、背景中奖与不中奖图片随机
+    // 3、无断点
+    // 4、当刮开区域超过70%，可自动清除全部蒙层
+
+    // 注意：Canvas 获取绘画上下文的 api 是 getContext("2d")
+    var myCanvas = document.getElementsByTagName("canvas")[0];
+    var ct = myCanvas.getContext('2d');
+    var w = myCanvas.width;
+    var h = myCanvas.width;
+    var downPos = {}; //将鼠标按下的坐标记录在对象中 防止变量污染
+
+    var myImg = new Image();
+
+    function getImg() {
+      var ran = Math.random();
+      if (ran > 0.9) {
+        myImg.src = './img/jiang.jpg'
+      } else {
+        myImg.src = './img/no.png';
+      }
+      myCanvas.style.background = 'url(' + myImg.src + ')' + 'no-repeat';
+      myCanvas.style.backgroundSize = '400px 400px';
+    }
+    getImg();
+    // 绘制蒙层
+    ct.fillStyle = '#aaa';
+    ct.fillRect(0, 0, w, h);
+    // 重合部分清空
+    ct.globalCompositeOperation = 'destination-out';
+
+    // 这里确保图片加载完成再进行刮奖
+    myImg.onload = function () {
+      myCanvas.addEventListener('mousedown', start, false);
+    }
+
+    function start(e) {
+      downPos.x = e.clientX - myCanvas.offsetLeft;
+      downPos.y = e.clientY - myCanvas.offsetTop;
+      //点击有效果 更好的体验
+      ct.beginPath();
+      ct.arc(downPos.x, downPos.y, 25, 0, Math.PI * 2);
+      ct.closePath();
+      ct.fill();
+      document.addEventListener('mousemove', move, false);
+      document.addEventListener('mouseup', up, false);
+    }
+
+    function move(e) {
+      var lastX = e.clientX - myCanvas.offsetLeft;
+      var lastY = e.clientY - myCanvas.offsetTop;
+      // ct.beginPath();
+      // ct.arc(x, y, 25, 0, Math.PI * 2);
+      // ct.closePath();
+      // ct.fill();
+      // 这里不需要画圆 因为会产生断点 用连线可以解决这个问题
+      ct.beginPath();
+      // 刷新每次连线起始点的坐标
+      ct.moveTo(downPos.x, downPos.y);
+      ct.lineTo(lastX, lastY);
+      ct.lineWidth = 50;
+      ct.lineCap = 'round';
+      ct.stroke();
+      // 记录每次移动的坐标 
+      downPos.x = lastX;
+      downPos.y = lastY;
+    }
+
+    function up() {
+      document.removeEventListener('mousemove', move, false);
+      document.removeEventListener('mouseup', up, false);
+      //    当用户刮开70%区域时 清除掉其他蒙层
+      clearA();
+    }
+    //    刮刮....
+    function clearA() {
+      var sum = 0;
+      var imgData = ct.getImageData(0, 0, w, h).data;
+      // getImageData是一个对象 里面的data属性是一个数组 存储着指定画布内的每个像素的颜色信息
+      // 每个像素有四个值 对应着rgba  a是透明度
+      // 当没有像素时代表透明 也就是透明度a为0; 那么rab对应的值也为0
+      for (var i = 0; i < imgData.length; i += 4) {
+        // 这里写i或者i+1或者i+2或者i+3都可以  i+3更具有针对性
+        if (imgData[i + 3] == 0) {
+          sum++;
+        }
+      }
+      if (sum > w * h * 0.7) {
+        ct.clearRect(0, 0, w, h);
+      }
+      console.log(sum)
+    }
+  </script>
+
+</body>
+
+</html>

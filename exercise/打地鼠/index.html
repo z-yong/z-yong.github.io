@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="打地鼠/mouse0.png" type="image/x-icon">
+    <title>打地鼠</title>
+    <style>
+       .box{
+           position: relative;
+           background: url('打地鼠/bg.png');
+           width: 750px;
+           height: 550px;
+           cursor: none;
+       }
+       .hammer img{
+           position: absolute;
+           top: 0;
+           left: 0;
+           margin-top: -35px;
+           margin-left: -45px;
+           width: 98px;
+           height: 77px;
+           z-index: 2;
+       }
+       div[class^=hold]{
+           width: 102px;
+           height: 103px;
+           /* border: 1px solid black; */
+           overflow: hidden;
+       }
+       .hold1{
+            position: absolute;
+            top: 150px;
+            left: 140px;
+       }
+       .hold2{
+            /* border: 1px solid black; */
+            position: absolute;
+            top: 150px;
+            left: 330px;
+       }
+       .hold3{
+            /* border: 1px solid black; */
+            position: absolute;
+            top: 150px;
+            left: 530px;
+       }
+        .hold4{
+            /* border: 1px solid black; */
+            position: absolute;
+            top: 240px;
+            left: 116px;
+       }
+       .hold5{
+            /* border: 1px solid black; */
+            position: absolute;
+            top: 240px;
+            left: 334px;
+       }
+       .hold6{
+            /* border: 1px solid black; */
+            position: absolute;
+            top: 240px;
+            left: 530px;
+       }
+       .hold7{
+            /* border: 1px solid black; */
+            position: absolute;
+            top: 335px;
+            left: 110px;
+       }
+       .hold8{
+            /* border: 1px solid black; */
+            position: absolute;
+            top: 340px;
+            left: 335px;
+       }
+       .hold9{
+            /* border: 1px solid black; */
+            position: absolute;
+            top: 340px;
+            left: 550px;
+       }
+       div[class^=hold] img{
+           width: 102px;
+           height: 103px;
+           position: absolute;
+           left: 0;
+           top: 103px;
+       }
+       .grade{
+           width: 100px;
+           height: 20px;
+           /* border: 1px solid black; */
+           position: absolute;
+           top: 195px;
+           left: 229px;
+           text-indent: 12px;
+       }
+       .when{
+           width: 100px;
+           height: 20px;
+           /* border: 1px solid #000000; */
+           position: absolute;
+           top: 195px;
+           left: 483px;
+           text-indent: 12px;
+       }
+    </style>
+</head>
+<body>
+    <div class="box">
+        <div class="grade">0</div>
+        <div class="when"><span>3</span> : <span/span>00</span></div>
+        <div class="hammer">
+            <img src="打地鼠/hammer1.png" alt="">
+        </div>
+        <div class="hold1"><img src="打地鼠/mouse1.png" alt=""></div>
+        <div class="hold2"><img src="打地鼠/mouse1.png" alt=""></div>
+        <div class="hold3"><img src="打地鼠/mouse1.png" alt=""></div>
+        <div class="hold4"><img src="打地鼠/mouse1.png" alt=""></div>
+        <div class="hold5"><img src="打地鼠/mouse1.png" alt=""></div>
+        <div class="hold6"><img src="打地鼠/mouse1.png" alt=""></div>
+        <div class="hold7"><img src="打地鼠/mouse1.png" alt=""></div>
+        <div class="hold8"><img src="打地鼠/mouse1.png" alt=""></div>
+        <div class="hold9"><img src="打地鼠/mouse1.png" alt=""></div>
+    </div>
+    <script defer>
+        var box = document.getElementsByClassName("box")[0];
+        var hammer = document.getElementsByClassName("hammer")[0].getElementsByTagName("img")[0];
+        var grade = document.getElementsByClassName("grade")[0];
+        var span = document.getElementsByTagName("span");
+
+        var num1 = 0;
+        var timer0 = setInterval(function (){
+            if(num1 == 0){
+                num1 = 60;
+                span[0].innerText --;
+            }
+            num1 --;//执行num--必须放在这个位置 如果放在上面  时间就会出现60这个数
+            var str = num1;
+            if(num1 < 10){
+                str = "0" + num1;
+            }
+            span[1].innerText = str;
+            if(span[0].innerText == 0 && span[1].innerText == 0){
+                clearInterval(timer0);
+            }
+        },1000)
+
+        //取出hold mouse1元素
+        var hold = [];
+        var mouse1 = [];
+        for(var i = 0; i < 9; i++){
+            hold[i] = document.getElementsByClassName("hold"+(i+1))[0];
+            mouse1[i] = hold[i].getElementsByTagName("img")[0];
+        }
+        
+        // 让锤子跟随鼠标移动
+        // document.onmousemove = moveHammer; //全局监听
+        box.onmousemove = moveHammer;
+        function moveHammer(e){
+            var x = e.clientX;
+            var y = e.clientY;
+            hammer.style.left = x + "px";
+            hammer.style.top = y + "px";
+        }
+        // 鼠标按下时
+        hammer.onmousedown = function (){
+            hammer.src = "打地鼠/hammer2.png";
+        }
+        // 鼠标松开时
+        hammer.onmouseup = function (){
+            hammer.src = "打地鼠/hammer1.png";
+        }
+
+        // var timer = setInterval(drop,30);
+
+        var speed = 5;
+        var nowTop = 103;
+        var newTop = 0;
+        var overTop = 103;
+        var time = 0;
+        var maxTime = 1000;
+
+        // var timer2;
+        function drop(){
+            nowTop -= speed;
+            console.log(num)
+            if(nowTop <= newTop){
+                nowTop = newTop;
+                // time += 30;
+                // if(time > maxTime){
+                //     clearInterval(timer)
+                //     timer = null;
+                //     nowTop = overTop;
+                // }
+                clearInterval(timer);
+                timer = null;
+                timer2 = setTimeout(function(){
+                            nowTop = overTop;
+                            mouse1[num].style.top = nowTop + "px";//这里要将top值再赋值 因为此时dorp函数执行停留在timer2计时器上 不会执行这个计时器以外的代码
+                        },1000)//上面的解释 我不知道对不对 我也不是特别明白 反正调试了很多次 必须要再赋值才可以 
+                if(nowTop == overTop){
+                    clearTimeout(timer2);
+                }
+            }
+            mouse1[num].style.top = nowTop + "px"; 
+        }
+        
+        hammer.onclick = hit;
+        //  击中老鼠时
+        function hit(e){
+            var x = e.clientX;
+            var y = e.clientY;
+            var x1 = hold[num].offsetLeft;
+            var x2 = x1 + hold[num].offsetWidth;
+            var y1 = hold[num].offsetTop + mouse1[num].offsetTop;
+            var y2 = hold[num].offsetTop + hold[num].offsetHeight;
+            // console.log("x:"+x+"y:"+y+"x1:"+x1+"x2:"+x2+"y1"+y1+"y2:"+y2)
+            if(x > x1 && x < x2 && y > y1 && y < y2){
+                mouse1[num].src = "打地鼠/mouse2.png";
+                grade.innerHTML ++; //分数加一
+            }
+        }
+
+        // 随机数 自动往上冒
+        var num = 0;
+        var timer = null;
+        setInterval(function (){
+            // mouse1[num].src = "打地鼠/mouse1.png";
+            num = Math.floor(Math.random()*9);
+            mouse1[num].src = "打地鼠/mouse1.png";
+            time = 0;
+            console.log(num)
+            if(timer == null){
+                timer = setInterval(drop,30);
+            }
+        },2000)
+    </script>
+</body>
+</html>

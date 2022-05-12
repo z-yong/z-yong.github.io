@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <title>腾讯官网-弹窗</title>
+    <style>
+       body{
+           height: 800px;
+           margin: 0;
+           padding: 0;
+           /* 让滚动条消失 */
+           overflow: hidden;
+       }
+       .ad{
+           /* 让图片固定在页面上 不随着页面滚动而移动 */
+           position: fixed;
+           right: 0;
+           bottom: 0;
+           /* border: 1px solid black; */
+           width: 300px;
+           /* 先让图片不显示 用js控制图片的高度 */
+           height: 0;
+           
+       }
+       .ad .bg{
+            width: 300px;
+            /* height: 225px; */
+            /* border: 2px solid black; */
+       }
+       .btu{
+            position: absolute;
+            top: 2px;
+            right: 0;
+            cursor: pointer;
+       }
+       .bd{
+           position: fixed;
+           width: 300px;
+           height: 170px;
+           top: 50%;
+           left: -300px;
+           margin-top: -85px;
+       }
+       .bd .bbg{
+           width: 300px
+       }
+       .bd .btn{
+           position: absolute;
+           top: 0;
+           right: 0;
+       }
+       .cd{
+           position:fixed;
+           top: -170px;
+           left: 50%;
+           margin-left: -150px;
+           width: 300px;
+           height: 170px;
+       }
+       .cd .bg{
+           width: 300px;
+           height: 170px;
+       }
+       .cd .btn{
+           position: absolute;
+           right: 0;
+           top: 0;
+       }
+    </style>
+</head>
+<body>
+    <iframe src="http://www.qq.com" frameborder="0" width="100%" height="100%"></iframe>
+    <div class="ad" id="ad">
+        <a href="javascript:;">
+            <img  class="bg" src="img/0.jpg" alt="">
+        </a>
+        <img id="btu" class="btu" src="img/close.jpg" alt="">
+    </div>
+    <div class="bd" id="bd">
+        <a href="javascript:;">
+            <img  class="bbg" src="img/0.jpg" alt="">
+            <img id="btn" class="btn" src="img/close.jpg" alt="">
+        </a>    
+    </div>
+    <div class="cd" id="cd">
+        <a href="javascript:;">
+            <img  class="bg" src="img/0.jpg" alt="">
+            <img id="btnn" class="btn" src="img/close.jpg" alt="">
+        </a>    
+    </div>
+    <script>
+        var ad=document.getElementById("ad");
+        var btu=document.getElementById("btu");
+        var bd = document.getElementById('bd');
+        var btn = document.getElementById("btn");
+        var cd = document.getElementById("cd");
+        var btnn = document.getElementById("btnn");
+
+
+        var nowTop = cd.offsetTop;
+        var newTop = 0;
+        function ppp(){
+            if(nowTop < newTop){
+                nowTop += 2
+            }else{
+                nowTop = newTop;
+                clearInterval(cc)
+            }
+            cd.style.top = nowTop + "px";
+        }
+        btnn.addEventListener("click",function(){
+            var timer = setInterval(function(){
+                if(nowTop > -170){
+                    nowTop -= 2
+                }else{
+                    nowTop = -170;
+                    clearInterval(time)
+                }
+                cd.style.top = nowTop + "px"
+            })
+        })
+
+
+        var nowLeft = bd.offsetLeft;
+        var newLeft = 0
+        function pop(){
+            if(nowLeft < newLeft){
+                nowLeft += 2;
+            }else{
+                nowLeft = newLeft;
+                clearInterval(bb);
+            }
+            bd.style.left = nowLeft + "px"
+        }
+        btn.addEventListener("click",function(){
+            var time = setInterval(function(){
+                if(nowLeft > -300){
+                    nowLeft -= 2
+                }else{
+                    nowLeft = -300
+                    clearInterval(time)
+                }
+                bd.style.left = nowLeft + 'px'
+            },20)
+        })
+
+
+        var adheight=0;
+        btu.addEventListener("click",close)
+        // btu.onclick= close;
+        function close(){
+            var bb=setInterval(quit,20);
+            function quit(){
+                if(adheight>0){
+                    adheight-=2;
+                    ad.style.height=adheight+"px";
+                }else{
+                    clearInterval(bb);
+                    ad.style.height="0px";
+                    ad.style.border="none";//当高度为o零时 让边框消失 否则会存在遗留边框问题
+                }
+            }
+        }
+        
+        function popup(){
+            if(adheight<160){//这里的168是根据图片本身分辨率大小以及html中设置的宽度算出来的
+                adheight+=2;
+                ad.style.height=adheight+"px";
+            }else{
+                clearInterval(aa);//做标记
+                ad.style.height="160px";
+            }     
+        }
+        var aa;
+        var bb;
+        var cc;
+        // DOMContentLoaded
+        window.addEventListener("load",function(){//当页面主要内容加载完之后再弹出广告
+            aa = setInterval(popup,20);//此时定义的计时器变量必须是全局变量，因为上面做标记处需要调用这个变量
+            bb = setInterval(pop,20);
+            cc = setInterval(ppp,20);
+        })
+    
+    </script>
+</body>
+</html>

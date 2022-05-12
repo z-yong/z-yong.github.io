@@ -1,0 +1,257 @@
+body{
+    font-family:  Helvetica Neue,Helvetica,Arial,Hiragino Sans GB,Hiragino Sans GB W3,WenQuanYi Micro Hei,sans-serif;
+}
+.ju{
+    padding: 50px 0 70px;
+    color: #fff;
+    box-sizing: border-box;
+}
+.ju h1{
+    letter-spacing: -2px;
+    font-size: 60px;
+    font-weight: 700;
+}
+.ju p:first-child{
+    font-size: 18px;
+    font-weight: 200px;
+}
+.ju p:nth-of-type(2) a{
+    font-size: 18px;
+    box-shadow: 
+    inset 0px 3px 7px rgba(0,0,0,0.2), inset 0px -3px 7px rgba(0,0,0,0.2);
+}
+.ju>a{
+    font-size: 14px;
+    color: rgba(255, 255, 255, 0.5);
+    text-decoration: none;
+}
+.box{
+    position: relative;
+    background: linear-gradient(45deg,#020031,#6d3353);
+}
+.box::after{
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    background: url('../img/bs-docs-masthead-pattern.png');
+    opacity: 0.4;
+    background-position: center;
+}
+@media screen and (min-width:768px){
+    .ju{
+        padding: 80px 0 100px;
+    }
+    .ju h1{
+        font-size: 90px;
+    }
+    .ju p:first-of-type{
+        font-size: 24px;
+    }
+}
+@media screen and (min-width:992px){
+    .ju{
+        padding: 70px 0 90px;
+    }
+    .ju h1{
+        font-size: 100px;
+    }
+    .ju p:first-of-type{
+        font-size: 30px;
+    }
+}
+.box{
+    margin-bottom: 0;
+}
+ul,li,a{
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    text-decoration: none;
+    color: #555;
+}
+.strip{
+    background: #f5f5f5;
+    border-bottom: 1px solid #ccc;
+}
+.strip ul{
+    width: 80%;
+    margin: 0 auto;
+    font-size: 0;
+    text-align: center;
+    padding: 15px 0;
+}
+.strip ul li{
+    display: inline-block;
+    font-size: 14px;
+}
+.strip a:hover{
+    color: #555;
+}
+.strip ul li:last-of-type a:hover {
+    color: #f33;
+}
+.strip .sp{
+    color: #ccc;
+    margin: 0 10px;
+}
+.strip .iconfont{
+    font-size: 20px;
+    margin-right: 7px;
+}
+
+.main{
+    padding: 40px 0;
+}
+.main .main-head{
+    width: 564px;
+    margin: 0 auto;
+}
+.main ul{
+    text-align: center;
+    padding-bottom: 20px;
+    margin-bottom: 40px;
+    border-bottom: 1px solid #ddd;
+}
+.main h2{
+    color: #333;
+    font-size: 42px;
+}
+.main ul li:last-of-type{
+    font-size: 14px;
+}
+.row .thumbnail{
+    border-radius: 0;
+    /* 注意这里要设置一下宽度 */
+    max-width: 310px;
+    margin: 15px auto;
+}
+.row .caption{
+    text-align: center;
+}
+.row .caption a:first-child{
+    color: #337ab7;
+}
+.row .caption a:first-child:hover{
+    color: #00f;
+}
+.row a:hover{
+    text-decoration: none;
+}
+.row .caption a .p{
+    color: #777;
+    font-size: 15.6px;
+}
+.row h3{
+    margin-bottom: 5px;
+    font-size: 24px;
+}
+.row .caption p:last-of-type{
+    font-size: 14px;
+    color: #555;
+}
+
+
+.last{
+    margin-top: 60px;
+    padding: 40px 0 20px;
+    border-top: 1px solid #ddd;
+    box-sizing: border-box;
+}
+.last .container{
+    height: 150px;
+    border-bottom: 1px solid #ccc;
+}
+.last .left{
+    float: left;
+}
+.last .right{
+    float: right;
+}
+.last .right dl{
+    float: left;
+}
+.last .container::after,
+.last .container::before,
+.last .right::after,
+.last right::before{
+    content: "";
+    display: table;
+}
+.last .container::after,
+.last .right::after{
+    clear: both;
+}
+.last .left p{
+    margin: 10px 0;
+}
+.right{
+    display: flex;
+    justify-content: space-between;
+    width: 456px;
+    margin-right: -30px;
+}
+.right dl dt{
+    margin-bottom: 10px;
+    font-size: 16px;
+    font-weight: 500;
+    color: #563d7c;
+}
+.right dl dd{
+    padding-bottom: 2px;
+}
+.right dl dd a:hover{
+    color: #555;
+}
+@media screen and (max-width:992px){
+    .right{
+        width: 100%;
+        margin: 15px 0 0 -30px;
+    }
+    .last .container{
+        height: 240px;
+    }
+}
+@media screen and (max-width:500px){
+    .right{
+        flex-direction: column;
+    }
+    .last .container{
+        height: 640px;;
+    }
+}
+.end{
+    text-align: center;
+}
+.end p{
+    margin-top: 15px;
+    color: #888;
+}
+.end span{
+    color: #ccc;
+    margin: 0 8px;
+}
+
+
+.index{
+    display: none;
+    position: fixed;
+    right: 20px;
+    bottom: 100px;
+    width: 40px;
+    height: 40px;
+    background: rgba(0, 0, 0, 0.4); 
+    text-align: center;
+    cursor: pointer;
+}
+.show{
+    display: block;
+}
+.index span{
+    font-size: 30px;
+    line-height: 40px;
+    color: #fff;
+    user-select: none;
+}

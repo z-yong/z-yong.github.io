@@ -1,0 +1,38 @@
+.box{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    font-size: 0;
+}
+.wrapper>div{
+    display: inline-block;
+    width: 50px;
+    height: 50px;
+}
+.wrapper .wall{
+    background: url('../image/wall.png')
+}
+.wrapper .coin{
+    background: url('../image/coin.png')
+}
+.wrapper .bg{
+    background: url('../image/bg.png')
+}
+.wrapper .pacman{
+    background: url('../image/pacman.png')
+}
+.box .ghost1{
+    /* 幽灵飘起来 */
+    position: absolute;
+    background: url('../image/ghost1.png');
+    width: 50px;
+    height: 50px;
+}
+.box .ghost2{
+    /* 幽灵飘起来 */
+    position: absolute;
+    background: url('../image/ghost2.png');
+    width: 50px;
+    height: 50px;
+}

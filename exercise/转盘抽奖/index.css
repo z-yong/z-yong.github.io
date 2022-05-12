@@ -1,0 +1,26 @@
+.wrapper{
+    /* width: 500px;
+    height: 500px; */
+    position: relative;;
+    user-select: none;
+}
+.box{
+    width: 450px;
+    margin: 30px auto;
+    /* transition: transform 3s ease; */
+}
+.box>img{
+    width: 450px;
+    transform: rotate(-30deg);
+}
+.btn{
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    margin-left: -75px;
+    margin-top: -75px;
+    width: 150px;
+    height: 150px;
+    background-image: url('./img/btn.png');
+    background-size: auto 150px;
+}

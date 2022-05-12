@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>数组去重</title>
+</head>
+<body>
+    <script>
+        Array.prototype.alone = function (attr = ''){
+      var str = []; // 用于装去重之后的条目
+      var obj = {}; // 利用对象属性不能重复的特性 以此作为介质
+      // 这里不能把this.length提前提取出来 因为下面代码有可能会删掉数组中的条目 其长度是动态的
+      for(var i = 0; i < this.length;){
+        if(attr){ // 根据对象中某一属性比对去重
+          if(!this[i][attr]) return console.warn('参数错误!')
+          if(!obj[this[i][attr]]){ // 没有定义
+            obj[this[i][attr]] = 1;
+            str.push(this[i]);
+            i++;
+          }else{ // 已经定义
+            this.splice(i,1)
+          }
+        }else{
+          if(!obj[this[i]]){ // 没有定义
+            obj[this[i]] = 1;
+            str.push(this[i]);
+            i++;
+          }else{ // 已经定义
+            this.splice(i,1)
+          }
+        }
+      }
+      return str;// 返回去掉的重复条目
+    }
+        // Array.prototype.alone = function (){
+        //     // var len = this.length;
+        //     var str = [];
+        //     for(var i = 0; i < this.length - 1; i++){//这里不能把this.length提前提取出来 因为下面代码有可能会删掉数组中的条目 其长度是动态的
+        //         for(var j = i+1; j < this.length;){
+        //             if(this[i] === this[j]){//绝对等于
+        //                 str.push(this.splice(j,1)[0]);
+        //                 // str.push(this[j]);
+        //                 // this.splice(j,1);
+        //             }else{
+        //                 j++;//只有当数组中条目没有被删除时 j才能++，否则数组比较时会错开
+        //             }      
+        //         }
+        //     }
+        //     return str;//返回去掉的重复条目
+        // }
+        var a = [2,1,4,5,6,4,1,5,1,5];
+        var b = ["ss","df","h","wt","df","aa","aa"]
+        var ary = [1,1,"1",2,2,"你好","试试",3,3,44,44,0 ,0,99,5,5,"ab","ab","试试","试试","你好"]
+        console.log(ary.alone());
+    </script>
+</body>
+</html>

@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        .box{
+            margin: 100px auto;
+            width: 300px;
+            height: 300px;
+        }
+        .small{
+            stroke: #ddd;
+            stroke-width: 10px;
+        }
+        .one{
+            stroke: salmon;
+            stroke-width: 10px;
+            /* 以125px为一段线 125px为一段空 依次循环 */
+            stroke-dasharray: 314px; 
+            /* 往回缩125px */
+            stroke-dashoffset: 314px;
+        }
+        .two{
+            stroke-width: 10px;
+            stroke: blue;
+            stroke-dasharray: 314px;
+            stroke-dashoffset:314px
+        }
+        .three{
+            stroke-width: 10px;
+            stroke: black;
+            stroke-dasharray: 314px;
+            stroke-dashoffset:314px
+        }
+    </style>
+</head>
+<body>
+    <svg class="box" xmlns='http://www.w3.org/2000/svg' version='1.1'>
+        <circle class="small" cx = "150" cy = "150" r = '50' fill = 'none'></circle>
+        <circle class="one" cx = "150" cy = "150" r = "50" fill = 'none'></circle>
+        <circle class="two" cx = "150" cy = "150" r = "50" fill = 'none'></circle>
+        <circle class="three" cx = "150" cy = "150" r = "50" fill = 'none'></circle>
+    </svg>
+    <script>
+        const bgDom = document.getElementsByClassName('small')[0];
+        const one = document.getElementsByClassName('one')[0];
+        const two = document.getElementsByClassName('two')[0];
+        const three = document.getElementsByClassName('three')[0];
+        const allLen = bgDom.getTotalLength();
+        console.log(allLen)
+        // one.style.strokeDasharray = allLen + 'px'
+        // two.style.strokeDasharray = allLen + 'px'
+        // three.style.strokeDasharray = allLen + 'px'
+        one.style.strokeDashoffset = ((1-0.3)*allLen) + 'px';
+        two.style.strokeDashoffset = (0.4*allLen) + 'px'
+        // one.style.strokeDashoffset = (0.4*allLen) + 'px'
+    </script>
+</body>
+</html>

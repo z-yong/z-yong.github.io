@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>汉诺塔</title>
+</head>
+<body>
+    <div></div>
+    <script>
+        // 解析：  如果是一个盘子 就直接放入C盘  其他的 无论有多少盘子 都分成三步
+        //         第一步：除了A柱最底的那个最大的 其他的盘子全部移到B柱
+        //         第二步：将A柱最底的那个最大的盘子移动到C柱
+        //         第三部：将B柱所有的盘子移动到C柱
+
+        var n = 0;
+        function hanio(num,A,B,C){
+            if(num == 1){
+                console.log("第"+ ++n + "步：" + A + "———>"+ C);
+            }else{
+                hanio(num-1,A,C,B);
+                console.log("第"+ ++n + "步：" + A + "———>"+ C);
+                hanio(num-1,B,A,C);
+            }
+        }
+        
+        
+    </script>
+</body>
+</html>

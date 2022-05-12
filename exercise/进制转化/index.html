@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>正整数转化为二进制</title>
+</head>
+<body>
+    <script>
+        //系统自带转化进制方法：
+        //    （0x16).toString(8)   -->16进制转化为8进制    
+        //     (12).toString(2)     -->十进制转化为2进制
+        //     
+        //      parseInt(24,16)   -->以16进制为基底转化为10进制
+        //      parseInt(0110,2)   -->以2进制为基底转化为10进制
+        //      parseInt(045,8)   -->以8进制为基底转化为10进制
+        //  十进制转化为二进制规则：
+        //  正整数：除以2 取余数排序后 倒序
+        //  小于1的小数：乘以2 取整数 正序
+        //  大于1的小数：拆成整数部分和小数部分 分别按照上面两种方法计算
+        //  负整数：在正整数基础上取反（如果是1就改为0，如果是0就改为1），并 + 1 
+
+        function er(num){
+            var arrNum = [];
+            while(num){
+                arrNum.push(num % 2);
+                // num = (num - num%2)/2//取商非常笨的写法
+                num  = parseInt(num / 2);
+            }
+            arrNum.reverse();
+            // return arrNum.toString();
+            return arrNum.join("");
+        }
+    </script>
+</body>
+</html>

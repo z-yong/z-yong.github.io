@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>自动</title>
+    <style>
+        body{
+            margin: 0;
+            padding: 0;
+        }
+        .box{
+            position: relative;
+            width: 500px;
+            height: 360px;
+            margin: 160px auto;
+            border: 3px dotted #ff6700;
+        }
+        .min{
+            position: absolute;
+            top: 50PX;
+            left: 100PX;
+            width: 100px;
+            height: 100px;
+            background: #d6c;
+            clip-path: polygon(50% 0,100% 50%,50% 100%,0 50%)
+        }
+    
+    </style>
+</head>
+<body>
+    <div class="box">
+        <div class="min"></div>
+    </div>
+    <script>    
+        var min = document.getElementsByClassName("min")[0];
+        var timer ;
+        var lock = true;
+        function test(){
+            if(lock){
+                timer = setInterval(move,50);
+            }
+        }
+        setInterval(test,100);
+        min.style.left = Math.floor(Math.random()*401) + "px" ;
+        min.style.top = Math.floor(Math.random()*261) + "px";
+        var speedx = 5;
+        var speedy = 4;
+        var num = 0;
+        function move(){
+            lock = false;
+            var x = min.offsetLeft;
+            var y = min.offsetTop;
+            num = num % 4;
+            switch(num){
+                case 0:
+                    min.style.left = x + speedx + "px";
+                    min.style.top = y - speedy + "px";
+                    if(min.offsetTop <= 0 || min.offsetLeft >= 400){
+                        clearInterval(timer);
+                        lock = true;
+                        // min.style.top = 0;
+                        num ++;
+                        if(min.offsetLeft >= 400){
+                            num = 2;
+                        }
+                    }
+                    break;
+                case 1:
+                    min.style.left = x + speedx + "px";
+                    min.style.top = y + speedy + "px";
+                    if(min.offsetLeft >= 400 || min.offsetTop >= 260){
+                        clearInterval(timer);
+                        lock = true;
+                        // min.style.left = 400+"px";
+                        num ++;
+                        // if(min.offsetTop >= 260){
+                        //     num = 3;
+                        // }
+                    }
+                    break;
+                case 2:
+                    min.style.left = x - speedx + "px";
+                    min.style.top = y + speedy + "px";
+                    if(min.offsetTop >= 260 || min.offsetLeft <= 0){
+                        clearInterval(timer);
+                        lock = true;
+                        // min.style.top = 260+"px";
+                        num ++;
+                        if(min.offsetLeft <= 0){
+                            num = 0;
+                        }
+                    }
+                    break;
+                case 3:
+                    min.style.left = x - speedx + "px";
+                    min.style.top = y - speedy + "px";
+                    if(min.offsetLeft <= 0 || min.offsetTop <=0){
+                        clearInterval(timer);
+                        lock = true;
+                        // min.style.left = 0;
+                        num ++;
+                        if(min.offsetTop <= 0){
+                            num = 1;
+                        }
+                    }
+                    break;
+            }
+        }
+    
+    
+    
+    
+    </script>
+</body>
+</html>

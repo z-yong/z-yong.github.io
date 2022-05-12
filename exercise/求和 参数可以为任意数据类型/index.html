@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>对任意数据类型进行求和</title>
+</head>
+<body>
+    <script>
+        function add(){
+            var sum = 0;
+            for(var i = 0; i < arguments.length; i++){
+                // var num = Number(arguments[i]);
+                // if(num){
+                //     sum += num
+                // }
+                var num = parseFloat(arguments[i]) || 0;//这个方法与上面的方法有一点区别  当参数有数字也有字符时 
+                // 会提取最前面的数字进行求和  而上面的方法 遇到数字和字符相结合的参数会直接忽略掉
+                sum += num;
+            }
+            return sum.toFixed(2)*100/100;//有一个精度问题 需要截掉一部分小数 
+            // toFixed方法会将数字转换成字符串形式 所以可以利用*100 再/100的方式转换成数字类型
+        }
+    </script>
+</body>
+</html> 

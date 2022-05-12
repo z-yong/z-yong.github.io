@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>随机</title>
+    <style>
+        .div{
+            position: absolute;
+            top: 100px;
+            left: 200px;
+            width: 100px;
+            height: 100px;
+            background: greenyellow;
+            clip-path: polygon(50% 0,100% 50%,50% 100%,0 50%)
+        }
+    </style>
+</head>
+<body>
+    <div>
+        <div class="div"></div>
+    </div>
+    <script>
+        var div = document.getElementsByClassName("div")[0];
+        div.addEventListener("mouseenter",rand)
+        function rand(){
+            var num = Math.floor(Math.random()*8);
+            var distance = 100;
+            var x = div.offsetLeft;
+            var y = div.offsetTop;
+            switch(num){
+                case 0: 
+                    if(x+distance<1366){
+                        div.style.left = x+distance+"px";
+                    }
+                    break;
+                case 1:
+                    if(x+distance<1366&&y+distance<657){
+                        div.style.left = x+distance+"px";
+                        div.style.top = y+distance+"px";
+                    }
+                    break;
+                case 2:
+                    if(y+distance<657){
+                        div.style.top = y+distance+"px";
+                    }
+                    break;
+                case 3:
+                    if(x-distance>0&&y-distance>0){
+                        div.style.left = x-distance+"px";
+                        div.style.top = y-distance+"px";
+                    }
+                    break;
+                case 4:
+                    if(x-distance>0){
+                        div.style.left = x-distance+"px";
+                    }
+                    break;
+                case 5:
+                    if(x-distance>0&&y+distance<657){
+                        div.style.left = x-distance+"px";
+                        div.style.top = y+distance+"px";
+                    }
+                    break;
+                case 6:
+                    if(y-distance>0){
+                        div.style.top = y-distance+"px";
+                    }
+                    break;
+                case 7:
+                    if(x+distance<1366&&y-distance>0){
+                        div.style.left = x+distance+"px";
+                        div.style.top = y-distance+"px";
+                    }
+                    break;
+            }
+        }
+    </script>
+</body>
+</html>

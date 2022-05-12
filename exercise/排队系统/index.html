@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>排队系统</title>
+</head>
+<body>
+    <script>
+        var getRan = (function(){
+            var v = 1;
+            var u = 1;
+            return function(){
+                var num = Math.floor(Math.random()*2);
+                if(num == 0){
+                    return "U" + u++;
+                }else{
+                    return "V" + v++;
+                }
+            }
+        })();
+        
+        var arrPerson = [];
+        function getList(person){
+            if(arrPerson.length == 0){
+                arrPerson.push(person);
+                return;
+            }
+            if(person[0] == "V"){
+                for(var i = 0; i < arrPerson.length; i++){
+                    if(arrPerson[i][0] == "U"){
+                        arrPerson.splice(i,0,person)
+                        break;
+                    }
+                }
+            }else{
+                arrPerson.push(person)
+            }
+        }
+        for(var i = 0; i < 5; i++){
+            getList(getRan());
+        }
+        setInterval(function (){
+            var firstPerson = arrPerson.shift();
+            console.log("叫号" + firstPerson);
+            var nextPerson = getRan();
+            console.log("新人" + nextPerson);
+            getList(nextPerson);
+            console.log("目前队列为：" + arrPerson);
+        },3000)
+
+
+
+
+
+        // for(var i = 0; i < arrPerson.length; i++){
+
+        // }
+    //     var arrPerson = [];
+    //     var v = 0;
+    //     var u = 0;
+    //     setInterval(function (){
+    //         // console.log(person)
+    //         var num = Math.floor(Math.random()*2);
+    //         if(num == 0){
+    //             arrPerson.push("user" + u++)
+    //         }else{
+    //             arrPerson.push("Vip" + v++)
+    //             for(var i = 0; i < arrPerson.length; i++){
+    //                 if(arrPerson[i].slice(0,4) == ("user")){
+    //                     arrPerson.splice(i,0,("Vip" + v))
+    //                     arrPerson.pop();
+    //                     break;
+    //                 }
+    //             }
+    //         }
+    //         console.log(arrPerson)
+    //     },3000)
+
+    //    setTimeout(function(){
+    //         setInterval(function(){
+    //             console.log( arrPerson[0] + "处理完毕\r\n")
+    //             arrPerson.splice(0,1);
+    //         },3000)
+    //     },9000);
+    </script>
+</body>
+</html>

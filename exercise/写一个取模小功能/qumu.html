@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>取模</title>
+    <style>
+        body,input,button{
+            margin: 0;
+            padding: 0;
+        }
+        .box{
+            display: flex;
+            width: 300px;
+            margin: 100px auto;
+            justify-content: space-around;
+        }
+        /* 移出箭头方法 针对谷歌 */
+        input::-webkit-outer-spin-button,
+        input::-webkit-inner-spin-button{
+                -webkit-appearance:none;
+        }
+        input{
+            width: 40px;
+            height: 30px;
+            line-height: 30px;
+            text-align: center;
+        }
+        span{
+            align-self: auto;
+            font-size: 30px;
+            margin: -5px 10px 0;
+        }
+        .box div{
+            width: 50px;
+            height: 30px;
+            line-height: 30px;
+            text-align: center;
+            border: 1px solid chartreuse;
+        }
+        button{
+            align-self: center;
+            width: 40px;
+            height: 30px;
+            font-size: 30px;
+            line-height: 30px;
+            background: chartreuse;
+            border: 1px solid chartreuse
+        }
+    </style>
+</head>
+<body>
+    <div class="box">
+        <input class="one" type="number">
+        <span>%</span>
+        <input class="two" type="number">
+        <button>=</button>
+        <div class="result"></div>
+        <div class="mod"></div>
+    </div>
+    <script>
+        var one = document.getElementsByClassName("one")[0],
+            two = document.getElementsByClassName("two")[0],
+            btn = document.getElementsByTagName("button")[0],
+            result = document.getElementsByClassName('result')[0],
+            mod = document.getElementsByClassName("mod")[0];
+        
+        btn.onclick = function(){
+            result.innerText = parseInt(one.value / two.value);
+            mod.innerText = one.value % two.value
+        }
+    </script>
+</body>
+</html>

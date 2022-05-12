@@ -1,0 +1,377 @@
+body,ul,li,p{
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+.header{ 
+    position: relative; 
+    width: 100%;;
+    background: url('../images/bg4.jpg');
+    background-size: cover;
+    background-position: center;
+    color: #fff;
+}
+.container{
+    width: 67%;
+    margin: auto;
+    text-align: center;
+}
+.header .main{   
+    padding: 40px 0 80px;
+}
+
+.header .logo{
+    display: inline-block;
+    padding: 10px 0;
+    width: 100%;
+    border-bottom: 2px solid #fff;
+}
+.logo img{
+    width: 10%;
+}
+.menu .list{   
+    display: flex;
+    justify-content: space-around;  
+    padding: 60px 0;
+    text-align: center;
+}
+
+.menu .list li{
+    width: 20%;
+    cursor: pointer;
+}
+.container h1{
+    padding: 8vw 0 10vw;
+    font-size: 6.1333vw;
+    font-weight: 900;
+}
+
+.newShop .container{
+    width: 1200px; 
+    text-align: left
+}
+.newShop p:first-child{
+    padding: 60px 0 40px;
+    background: url('../images/icon01.png') no-repeat;
+    background-size: 27px 28px;
+    background-position: left 60px;
+    text-align: left;
+    text-indent: 2.5em;
+    line-height: 28px;
+    font-weight: 700;
+}
+.newImg{
+    display: flex;
+    justify-content: space-between;
+}
+.newImg>li{
+    width: 50%;
+}
+.newImg .right{
+    font-size: 0;
+}
+.coffee {
+    margin-top: 30px;
+    width: 1200px;
+}
+.coffee .list{
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+}
+.coffee .list li{
+    padding: 10px 20px;
+    color: rgb(153, 153, 153);
+    font-size: 14px;
+    flex-grow: 1
+}
+.coffee .list li .active{
+    display: inline-block;
+    width: 50%;
+    height: 2px;
+    background: #000;
+}
+.coffeeMessage li{
+    width: 50%
+}
+.coffee .coffeeMessage .coffee-list{
+    display: flex;
+    justify-content: space-between
+}
+.coffee-list{
+    border: 1px solid #ddd;
+    padding: 60px 0;
+    margin-top: -14px
+}
+.coffee-list img{
+    vertical-align: top
+}
+.describe{
+    display: inline-block;
+}
+.describe p{
+    padding: 5px 0;
+    color: #666;
+    font-size: 14px
+}
+.coffeeMessage>div{
+    display: none;
+}
+
+.coffeeMessage .active-coffee{
+    display: block;
+}
+.newMessage{
+    background: url('../images/bg7.jpg');
+    text-align: center;
+    padding: 80px 0;
+}
+.headline{
+    margin-bottom: 80px;
+}
+.headline>img{
+    vertical-align: middle;
+    width: 27px;
+    margin: 0 5px;
+}
+.headline h4{
+    display: inline-block;
+}
+.newMessage>.shop{
+    max-width: 1200px;
+    margin: auto;
+}
+.shop .list-shop img{
+    max-width: 300px;
+}
+.newMessage .shop .list-shop{
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+}
+.shop .list-shop>li{
+    width: 40%;
+}
+.shop .list-shop .text{
+    display: inline-block;
+    text-align: left;
+    width: 80%;
+    padding-bottom: 10px;
+    color: #666;
+}
+.list-shop p{
+    font-size: 20px;
+    font-weight: 900;
+    margin: 10px 0;
+}
+.aboutUs{
+    background: #fff;
+    margin: 150px 0 120px
+}
+.aboutUs h4{
+    color: #363d70;
+    font-size: 22px;
+}
+.aboutUs .us{
+    margin-top: 20px;
+    font-size: 12px;
+}
+.us p {
+    padding: 8px 0
+}
+.usImg{
+    max-width: 1200px;
+    margin: 40px auto 0;
+}
+.usImg .usImg-list{
+    display: flex;
+    justify-content: space-around;
+}
+.usImg-list li{
+    padding: 0 80px;
+}
+.usImg-list img{
+    /* max-width: 432px;; */
+    max-width: 100%;
+}
+.usImg-list .right{
+    padding: 30px 80px;
+}
+.usImg-list h1{
+    font-size: 36px;
+}
+.messageBox p{
+    font-size: 12px;
+    color: #333;
+    padding: 8px;
+}
+.messageBox .btn{
+    width: 146px;
+    height: 36px;
+    background: #363d70;
+    color: #fff;
+    line-height: 36px;
+    text-align: center;
+    margin: 30px 0;
+    font-size: 14px;
+}
+.footer{
+    text-align: center;
+    background: #363d70;
+    height: 96px;
+}
+.footer>div{
+    padding: 40px 0;
+    font-size: 0;
+} 
+.footer li{
+    display: inline-block;
+    font-size: 14px;
+}
+.footer ul li a{
+    color: #ffff;
+    text-decoration: none;
+}
+.footer ul li a:hover{
+    text-decoration: underline;
+}
+.footer span{
+    font-size: 14px;
+    margin: 0.4em;
+    color: #ffff;
+}
+/* 导航下拉菜单 */
+.subMenu{
+    display: none;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 30px;
+    cursor: pointer;
+}
+/* 媒体查询 */
+@media screen and (max-width: 1200px){
+    .container{
+        max-width: 100%;
+    }
+    .newImg{
+        flex-wrap: wrap;
+    }
+    .newImg>li{
+        width: 100%;
+    }
+    .newImg li img{
+        width: 100%;;
+    }
+    .newImg .right a:nth-of-type(1) img,
+    .newImg .right a:nth-of-type(2) img{
+        width: 50%;
+    }
+    .newImg .righr a:nth-of-type(3) img{
+        width: 100%
+    }
+    .usImg>.usImg-list li{
+        padding: 30px 0px;
+    }
+}
+
+@media screen and (max-width: 900px){
+    .usImg .usImg-list{
+        flex-wrap: wrap;
+    }
+    .usImg-list li{
+        /* 这里只要比50%大就可以 */
+        width: 60%;
+    }
+}
+@media screen and (max-width: 768px){
+    .header .main{
+        padding: 40px 0 60px;
+    }
+    .menu{
+        display: none
+    }
+    .menu .list{
+        flex-wrap: wrap;
+        padding: 40px 0 0;
+    }
+    .menu .list li{
+        width: 100%;
+        height: 40px;;
+    }
+    .subMenu{
+        display: block;
+    }
+    .coffee-list{
+        flex-wrap: wrap;
+    }
+    .coffeeMessage li{
+        width: 100%;
+        margin-top: 20px;
+    }
+    .coffeeMessage li:last-child{
+        margin-top: 60px
+    }
+    .coffee-list img{
+        margin-right: 100px;
+    }
+    .shop .list-shop>li{
+        width: 100%;
+    }
+}
+@media screen and (max-width: 568px){
+    .header .main{
+        padding: 30px 0 40px;
+    }
+    .describe{
+        margin-right: 100px;
+    }
+    .shop .list-shop img{
+        width: 90%;
+    }
+}
+
+/* 通过两个class绑定动画效果 */
+.toRightAnima{
+    animation: toRight 1s ease;
+}
+.toMoveAnima{
+    animation: logoMove 1s cubic-bezier(0.42, 0, 0.58, 1);
+}
+/* 动画 */
+@keyframes toRight{
+    0%{
+        transform: translate(-100%,0)
+    }
+    80%{
+        transform: translate(1%,0)
+    }
+    100%{
+        transform: translate(0)
+    }
+}
+
+@keyframes logoMove{
+    0%{
+        transform: perspective(400px) rotateY(90deg);
+        animation-timing-function: ease-in;
+        opacity: 0;
+    }
+    49%{
+        transform: perspective(400px) rotateY(-20deg);
+        animation-timing-function: ease-in;
+        opacity: 0.3;
+    }
+    60%{
+        transform: perspective(400px) rotateY(10deg);
+        opacity: 0.5;
+    }
+    80%{
+        transform: perspective(400px) rotateY(-5deg);
+        opacity: 1;
+    }
+    100%{
+        transform: rotateY(0);
+        opacity: 1;
+    }
+}

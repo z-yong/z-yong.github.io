@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+    <style>
+        .box{
+            position: relative;
+        }
+        .bg{
+            position: absolute;
+            top: 0;
+            left: 100px;
+            width: 300px;
+            height: 30px;
+            color: #666;
+            line-height: 30px;
+            border: 1px solid black
+        }
+        .active{
+            position: absolute;
+            top: 0px;
+            left: 100px;
+            width: 300px;
+            height: 50px;
+            line-height: 30px;
+            color: #ff6700;
+            clip: rect(0,0,30px,0);
+            border: 1px solid red
+        }
+    </style>
+</head>
+<body>
+    <div class="box">
+        <div class="bg">
+            你是坏孩子 没人喜欢你
+        </div>
+        <div class="active">
+            你是坏孩子 没人喜欢你
+        </div>
+    </div>
+</body>
+</html>

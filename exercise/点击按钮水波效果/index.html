@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>水波效果</title>
+    <style>
+        .btn{
+            position: absolute;
+            top: 100px;
+            left: 100px;
+            text-align: center;
+            line-height: 40px;
+            width: 100px;
+            height: 40px;
+            /* background: linear-gradient(to right, #ccc , #666 50%, #ccc) */;
+            background: #555;
+            overflow: hidden;
+        }
+        .anima{
+            position: absolute;
+            width: 25px;
+            height: 25px;
+            border-radius: 50%;
+            background: #bbb;
+        }
+        @keyframes ripple{
+            100%{
+                transform: scale(3);
+                opacity: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="btn">点 我</div>
+
+    <script src="./jquery-3.4.1.min.js"></script>
+    <script>
+        var span = document.createElement('span');
+        $(".btn").on('click',function(e){
+            // 点击后先删掉之前的水波
+            // 这里使用jquery添加的元素 如果是原生js 同样的dom不会重复添加 会覆盖掉之前的 但jquery会累加
+            $(".anima").remove();
+            $(this).append("<div class = 'anima'></div>");
+            // (e.clientY + document.documentElement.scrollTop + document.body.scrollTop) === e.clientY;
+            var x = e.pageX - $(this).offset().left - $('.anima').width()/2;
+            var y = e.pageY - $(this).offset().top - $('.anima').height()/2;
+            console.log(x + '  ' + y + "  "+ $('.anima').width())
+            $('.anima').css({
+                left: x,
+                top: y
+            })
+            $('.anima')[0].style.animation = 'ripple 1s ease forwards';
+        })
+    </script>
+</body>
+</html>

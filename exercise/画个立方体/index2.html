@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>立方体的第二种写法</title>
+    <style>
+        .wrapper{
+            perspective: 600px;
+        }
+        .box{
+            position: relative;
+            width: 300px;
+            height: 300px;
+            margin: 100px auto;
+            transform-style: preserve-3d;
+            animation: move 3s linear infinite;
+        }
+        @keyframes move{
+            100%{
+                transform: rotate3d(1,1,1,360deg)
+            }
+        }
+        .item{
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 300px;
+            height: 300px;
+            text-align: center;
+            line-height: 300px;
+            opacity: 0.5;
+        }
+        .box .item:nth-child(1){
+            background: green;
+            transform: translateZ(150px);
+        }
+        .box .item:nth-child(2){
+            background: yellow;
+            transform: rotateY(90deg) translateZ(150px);
+        }
+        .box .item:nth-child(3){
+            background: salmon;
+            transform: rotateY(-90deg) translateZ(150px);
+        }
+        .box .item:nth-child(4){
+            background: aqua;
+            transform: rotateY(180deg) translateZ(150px);
+        }
+        .box .item:nth-child(5){
+            background: red;
+            transform: rotateX(90deg) translateZ(150px);
+        }
+        .box .item:nth-child(6){
+            background: darkcyan;
+            transform: rotateX(-90deg) translateZ(150px);
+        }
+    </style>
+</head>
+<body>
+    <div class="wrapper">
+        <div class="box">
+            <div class="item">一</div>
+            <div class="item">二</div>
+            <div class="item">三</div>
+            <div class="item">四</div>
+            <div class="item">五</div>
+            <div class="item">六</div>
+        </div>
+    </div>
+</body>
+</html>

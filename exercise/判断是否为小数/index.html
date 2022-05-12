@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>判断是否为小数</title>
+</head>
+<body>
+    <script>
+        function judge(num){
+            var x = String(num).indexOf(".");
+            var y = String(num).length - x -1;
+            if(x>0){
+                console.log("这个数是小数，这个数的小数点后有"+y+"位")
+            }else{
+                console.log("它不是小数")
+            }
+        }
+    
+    </script>
+</body>
+</html>

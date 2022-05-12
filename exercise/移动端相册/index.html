@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>移动端相册</title>
+    <link rel="stylesheet" href="./iconfont/iconfont.css">
+    <style>
+        body,ul,li{
+            margin: 0;
+            padding: 0;
+            list-style: none;
+            font-size: 0;
+        }
+        .wrapper{
+            position: relative;
+            background: #333;
+            width: 100%;
+            height: 100vh;
+            /* 需要移动端滑动 这句一定要加 */
+            overflow: hidden;
+        }
+        
+        .list{
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            background: #333;
+        }
+        .list li{
+            margin: 2px 0;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            /* overflow: hidden; */
+        }
+        img{
+            width: 100%;
+        }
+        .wrapper .iconfont{
+            position: absolute;
+            top: 2vh;
+            left: 1vh;
+            display: none;
+            font-size: 25px;
+            color: #fff;
+            z-index: 99;
+        }
+    </style>
+</head>
+<body>
+    <div class="wrapper">
+        <div class="iconfont">&#xe67a;</div>
+        <ul class="list">
+            <li><img src="./img/1.jpg" alt=""></li>
+            <li><img src="./img/2.jpg" alt=""></li>
+            <li><img src="./img/3.jpeg" alt=""></li>
+            <li><img src="./img/4.jpg" alt=""></li>
+            <li><img src="./img/5.jpg" alt=""></li>
+            <li><img src="./img/6.jpg" alt=""></li>
+            <li><img src="./img/7.jpeg" alt=""></li>
+            <li><img src="./img/8.jpg" alt=""></li>
+            <li><img src="./img/9.jpg" alt=""></li>
+            <li><img src="./img/10.jpg" alt=""></li>
+            <li><img src="./img/11.jpeg" alt=""></li>
+            <li><img src="./img/12.jpg" alt=""></li>
+            <li><img src="./img/13.jpg" alt=""></li>
+            <li><img src="./img/14.jpg" alt=""></li>
+            <li><img src="./img/15.jpg" alt=""></li>
+            <li><img src="./img/16.jpg" alt=""></li>
+            <li><img src="./img/17.jpg" alt=""></li>
+            <li><img src="./img/18.jpg" alt=""></li>
+            <li><img src="./img/19.jpg" alt=""></li>
+            <li><img src="./img/20.jpeg" alt=""></li>
+            <li><img src="./img/21.jpeg" alt=""></li>
+            <li><img src="./img/22.jpg" alt=""></li>
+            <li><img src="./img/23.jpeg" alt=""></li>
+            <li><img src="./img/24.jpg" alt=""></li>
+            
+        </ul>
+    </div>
+    <script src="./js/zepto.js"></script>
+    <!-- <script src="./js/jquery.js"></script> -->
+    <script src="./js/touch.js"></script>
+    <script src="./js/fx.js"></script>
+    <script src="./js/module.js"></script>
+    <script src="./js/index.js"></script>
+</body>
+</html>

@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <title>自动切换焦点图</title>
+    <link rel="stylesheet" href="index.css">
+</head>
+<body>
+    <div class="box" id="box">
+        <div class="left" id="left">
+            <img src="img/1.jpg" alt="">
+            <img src="img/2.jpg" alt="">
+            <img src="img/3.jpg" alt="">
+        </div>
+        <div class="right" id="right">
+            <img class="show" src="img/1.jpg" alt="">
+            <img src="img/2.jpg" alt="">
+            <img src="img/3.jpg" alt="">
+        </div>
+        <img id="frame" src="img/pointer.png" alt="">
+    </div>
+</body>
+    <script>
+        var left = document.getElementById("left").getElementsByTagName("img"),
+            right = document.getElementById("right").getElementsByTagName("img"),
+            frame = document.getElementById("frame"),
+            box = document.getElementById("box");
+
+        var numbers = [0,95,189];
+        for(var i = 0; i < left.length; i++){
+            (function(){
+                // 如果不给立即执行函数传参数的话 这里必须是局部变量 因为如果变量作用域在全局的话 index就会始终都是2 因为每次执行这个立即执行函数
+                // 已经对index值的进行改变了 而局部变量 也就是加var 那么index每次被赋值都是全新的值 栈内存也不同
+                var index = i;
+                // console.log(index)
+                left[index].onmouseenter = control;
+                function control(){
+                    for(var i = 0; i < right.length; i++){
+                        right[i].className = "";
+                    }
+                    console.log(index)
+                    right[index].className = "show";
+                    nowTop = frame.offsetTop;//获取当前top位置 此位置随着图片位置的改变而改变
+                    newTop = numbers[index];//设置移动的卡点
+                    //避免线程同时启动 这里可以判断一下
+                    if(timer==null){
+                        timer = setInterval(move,eachTime);
+                    }
+                }      
+            })();
+        }
+        
+        // for(var i = 0; i < left.length; i++){
+            // left[i].index = i;//设置一个索引
+        //     left[i].onmouseenter = control;
+        //     
+        // }
+        // function control(){
+        //     for(var i = 0; i<right.length; i++){
+        //         // console.log(this.index);
+        //         if(i == this.index){
+        //             right[i].className = "show";
+
+        //             nowTop = frame.offsetTop;//获取当前top位置 此位置随着图片位置的改变而改变
+        //             newTop = numbers[i];//设置移动的卡点
+                    
+        //             //避免线程同时启动 这里可以判断一下
+        //             if(timer==null){
+        //                 timer = setInterval(move,eachTime);
+        //             }
+                    
+        //         }else{
+        //             right[i].className = "";
+        //         }
+        //     }  
+        // }
+        var nowTop = 0 ;
+        var newTop = 0;
+        var timer;
+        var speed = 5;
+        var time = 150;
+        var eachTime = 10;
+        var speed2 = 0;
+        function move(){
+            // 当前Top小于鼠标移动的位置时 向下
+            // if(nowTop<newTop){
+            //     nowTop+=speed;
+            //     if(nowTop>newTop){
+            //         clearInterval(timer);
+            //         timer=null;
+            //         nowTop=newTop;  
+            //     }
+            // //当前Top等于鼠标移动的位置时
+            // }else if(nowTop==newTop){
+            //     clearInterval(timer);
+            //     timer=null;
+            // }else{//当前Top大于鼠标移动的位置时 向上
+            //     nowTop-=speed;
+            //     if(nowTop<newTop){
+            //         clearInterval(timer);
+            //         timer=null;
+            //         nowTop=newTop;
+            //     }
+            // }
+            // 以下是简化版
+            speed2 = (newTop-nowTop)/(time/eachTime);//定义速度
+            nowTop += speed2;
+            if(nowTop == newTop){
+                clearInterval(timer);
+                timer=null;
+                nowTop=newTop;
+            }
+            frame.style.top = nowTop+"px";
+        }
+
+
+//自动切换
+        var play;
+        function carry(){
+            play = setInterval(self,3000);
+        }
+        function stop(){
+            clearInterval(play);
+        }
+        carry();
+        box.addEventListener("mouseenter",stop);
+        box.addEventListener("mouseleave",carry)
+
+        var number = 1;
+        function self(){
+            number = number%3;//对3取模，使number值始终在0,1,2之间
+            nowTop = frame.offsetTop;
+            newTop = numbers[number];
+            
+            number++;//number加一次 代表边框移动一次
+            if(timer==null){
+                timer = setInterval(move,10);
+            }
+            for(var i = 0; i<right.length;i++){
+                if(i==(this.number-1)){//此时number被加一所以要减去一
+                    right[i].className = "show";
+                }
+                else right[i].className = "";
+            }
+        }
+
+
+    </script> 
+
+
+</html>

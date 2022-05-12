@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <title>购物车</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/cart.css">
+    <link rel="stylesheet" href="css/iconfont.css">
+</head>
+<body>
+    <div class="miniheader">
+        <div class="container">
+            <div class="miniheader-logo"><a href="#">小米官网</a></div>
+            <div class="miniheader-title ">
+                <h2>我的购物车</h2>
+                <p>温馨提示：产品是否购买成功，以最终下单为准哦，请尽快结算</p>
+                
+            </div>
+            <div class="miniheader-info">
+                <i class="iconfont">&#x221a;</i>
+                <a href="#" class="user-name"><span></span></a>
+                <span class="sep">|</span>
+                <a href="#" class="info-order">我的订单</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="cartmain">
+        <div class="container">
+            <div class="cartmain-list">
+                <div class="list-head clearfix">
+                    <div class="col col-check"><i class="iconfont icon-checkbox">&#x221a</i> 全选</div>
+                    <div class="col col-img">&nbsp;</div>
+                    <div class="col col-name">商品名称</div>
+                    <div class="col col-price">单价</div>
+                    <div class="col col-num">数量</div>
+                    <div class="col col-total">小计</div>
+                    <div class="col col-action">操作</div>
+                </div>
+                <div class="list-body">
+                    <div class="item-box clearfix">
+                        <div class="col col-check"><i class="iconfont icon-checkbox">&#x221a</i></div>
+                        <div class="col col-img"><a href="#"><img src="" alt=""></a></div>
+                        <div class="col col-name"></div>
+                        <div class="col col-price"><label class="price"></label>元</div>
+                        <div class="col col-num">
+                            <div class="change-num clearfix">
+                                <a data-change="-1" href="javascript:;"><i class="iconfont">&#xe60b;</i></a>
+                                <input type="text" value="1">
+                                <a data-change="1" href="javascript:;"><i class="iconfont">&#xe609;</i></a>
+                            </div>
+                        </div>
+                        <div class="col col-total"><label class="price"></label>元</div>
+                        <div class="col col-action"><a href="javascript:;"><i class="iconfont">&#xe602;</i></a></div>
+                    </div>
+                </div>
+            </div>
+            <div class="cartmain-bar clearfix">
+                <div class="bar-info">
+                    <a href="index.html">继续购物</a>
+                    <span class="info-total">共 <i class="total-num"></i> 件商品，已选择 <i class="total-num"></i> 件</span>
+                </div>
+                <span class="total-price">合计：<em class="totalprice-num">0.00</em>元</span>
+                <form method="get" action="checkout.html" style="display: inline">
+                    <!-- 这个input框只为了存储及获取参数 作为订单网页的标识-->
+                    <input type="hidden" name="ids" id="ids" />
+                    <a href="javascript:;" id="checkout" class="bar-btn btn-disabled">去结算</a>
+                </form>
+            </div>
+        </div>
+    </div>
+
+<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+<script src="js/api.js"></script>
+<script src="js/header.js"></script>
+<script>
+    const list = $(".list-body");
+    const info = $('.bar-info');
+    const box = $('.list-body .item-box').remove();
+    const check = box.find('.col-check');
+    const img = box.find('.col-img');
+    const name = box.find('.col-name');
+    const price = box.find('.col-price');
+    const num = box.find('.col-num');
+    const total = box.find('.col-total');
+    const action = box.find('.col-action');
+    $.apiGet('/user/cart').done(function(data){
+    //   添加dom
+        data.forEach(function(ele,index){
+            box.html('');
+            const ch = check.clone(); 
+            const image = img.clone();
+            const nameShop = name.clone();
+            const pri = price.clone();
+            const quant = num.clone();
+            const tal = total.clone();
+            const act= action.clone();
+            image.attr('src',ele.imgs[0]);
+            nameShop.text(ele.name);
+            pri.find('.price').text(ele.price);
+            quant.find('.change-num input').val(ele.quantity);
+            tal.find('.price').text(ele.quantity * ele.price);
+            box.append(ch,image,nameShop,pri,quant,tal,act).clone().data('id',ele.id).appendTo(list);
+        })
+        calc()
+    //   获取总共的商品数
+        const len = data.reduce(function(sum,item){
+            return sum + +item.quantity
+        },0)
+        info.find('.info-total .total-num').first().text(len);
+
+
+    //   加减商品
+        list.find('.col-num .change-num').on('click','a',function(){
+            let vals = +$(this).siblings('input').val();
+            vals += parseInt($(this).data('change'));
+            upDate($(this),vals);
+        })
+    //   勾选商品
+        list.find('.col-check .icon-checkbox').click(function(){
+            $(this).parents('.item-box').toggleClass('selected');
+            $(this).toggleClass('select');
+            if(!$(this).hasClass('select')){
+                $('.list-head .col-check .icon-checkbox').removeClass('select')
+            }
+            calc()
+        })
+        // 全选
+        $('.list-head').find('.icon-checkbox').click(function(){
+            // $('.list-body').find('.item-box').toggleClass('selected');
+            const target = $('.col-check .icon-checkbox');
+            if(addClass(target)){
+                target.removeClass('select');
+                $('.list-body').find('.item-box').removeClass('selected')
+            }else{
+                target.addClass('select');
+                $('.list-body').find('.item-box').addClass('selected')
+            }
+            calc()
+        })
+    })
+    
+    // 判断当前是否选中
+    function addClass(dom){
+        let x = 0;
+        dom.each(function(){
+            if($(this).hasClass('select')){
+                x = 1
+            }
+        })
+        return x; //x为0说明一个都没有select;类 为1说明至少有一个有
+    }
+    //    结算
+    $('form').on('click','.btn-primary',function(){
+        $(this).parent('form').submit()
+    })
+    //   更新购物车
+    function upDate(dom,num){
+        const thisDom = dom.parents('.item-box');
+        $.apiPost('/user/updateCart',{id: thisDom.data('id'),quantity: num})
+        .done(function(data){
+            if(!num){
+                thisDom.remove()
+            }else{
+                const unit = thisDom.find('.col-price .price').text();
+                thisDom.find('.col-total .price').text(unit * num);
+                thisDom.find('.change-num input').val(num)
+            }
+            calc()
+        })   
+    }
+    //   计算总价及选中价格
+    function calc(dom){
+        let totalNum = 0 , num = 0, sum = 0;
+        const ids = [];
+        // 所有商品数量
+        $('.list-body').find('.item-box .change-num input').each(function(){
+            totalNum += +$(this).val()
+        })
+        $('.list-body').find('.selected').each(function(){
+            // 添加标识 form表单中get请求可以将其添加至url中
+            ids.push($(this).data('id'))
+            num += +$(this).find('.change-num input').val(); //选中商品数量
+            sum += +$(this).find('.col-total .price').text(); //选中商品总价格
+        })
+        info.find('.info-total .total-num').first().text(totalNum).next().text(num)
+        $('.totalprice-num').text('￥' + sum + '.00');
+        $('.bar-btn').toggleClass('btn-primary',num !== 0);
+        $('#ids').val(ids.join(','))
+    } 
+</script>
+</body>
+</html>

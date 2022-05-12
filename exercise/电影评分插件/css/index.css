@@ -1,0 +1,46 @@
+body{
+    background: #000
+}
+.wrapperMovie{
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%,100px);
+    text-align: center;
+    color: #fff;
+    font-size: 24px;
+    user-select: none;
+}
+.wrapperMovie p{
+    text-align: left;
+    text-indent: 0.5em;
+}
+.bg{
+    background: url(../rate-bg.svg);
+    display: inline-block;
+    position: relative;
+    cursor: pointer;
+    /* background-size: 48px;
+    width: 480px;
+    height: 48px; */
+}
+/*  */
+.bg[data-title]:hover::after{
+    content: attr(data-title);
+    position: absolute;
+    left: 0;
+    top: 120%;
+    font-size: 16px;
+    color: #999;
+    background: #ccc;
+    padding: 2px 5px;
+    border-radius: 5px;
+}
+.active{
+    background: url(../rate-yellow.svg);
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    /* background-size: 48px; */
+    /* width: 48px; */
+}

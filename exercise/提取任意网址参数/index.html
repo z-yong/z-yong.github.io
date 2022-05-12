@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>提取任意网址参数</title>
+</head>
+<body>
+    <script>
+        var url = "https://passport.weibo.com/visitor/visitor?entry=miniblog&a=enter&url=https%3A%2F%2Fweibo.com%2F&domain=.weibo.com&sudaref=https%3A%2F%2F123.sogou.com%2F%3F81002-1001&ua=php-sso_sdk_client-0.6.28&_rand=1559387352.2753"
+        var url1 = "https://www.baidu.com/s?ie=utf-8&f=8&rsv_bp=1&tn=80035161_2_dg&wd=%E5%B0%8F%E7%B1%B3%E7%A7%92%E6%9D%80&oq=%25E5%25B0%258F%25E7%25B1%25B3%25E9%2597%25AA%25E8%25B4%25AD&rsv_pq=d25618fe00193180&rsv_t=df18ju54V9KyOQDdTRaRodNSTbLU2n%2FeFYzEIJZqO5qyUiQi6yfgN7If%2FLefN4rm5DZOIQ&rqlang=cn&rsv_enter=1&rsv_sug3=11&rsv_sug1=5&rsv_sug7=100&rsv_sug2=0&inputT=2290&rsv_sug4=3021"
+        function gain(url){
+            // var reg = /\w+\=(\w|-|\.|%)+/gi;
+            // var reg = /\w+=[\w-.%]+/gi
+            var param = {}
+            var reg = /(\w+)=([\w-.%]+)/gi
+            // var arrUrl = url.match(reg);
+            // for(var i = 0; i < arrUrl.length; i++){
+            //     var index = arrUrl[i].indexOf("=");
+            //     param[arrUrl[i].slice(0,index)] = arrUrl[i].slice(index+1)
+            // }
+            // 以下是更优雅的方式 根据子表达式传递参数
+             url.replace(reg,function(a,b,c){
+                 param[b] = c
+             })   
+            return param;
+        }
+        
+    </script>
+</body>
+</html>

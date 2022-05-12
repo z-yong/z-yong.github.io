@@ -1,0 +1,85 @@
+body,ul,li{
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+}
+.box{
+    position: relative;;
+    margin: 150px auto;
+    width: 520px;
+    height: 280px;
+    border: 2px solid #111;
+    /* 把两端图片截除 */
+    overflow: hidden;
+}
+.box>.main{
+    position: absolute;
+    left: -520px;
+    width: 3640px;
+    height: 280px;
+    font-size: 0;
+}
+.main img{
+    display: inline-block;
+    width: 520px;
+    height: 280px;
+}
+ul{
+    font-size: 0;
+    border-radius: 8px;
+    background: rgba(255, 255, 255,.3);
+    position: absolute;
+    bottom: 15px;
+    /* 此处没有定义ul的宽度
+    并且用绝对定位的情况下，居中不能用margin:auto 
+    以下方法可以解决*/
+    left: 50%;
+    margin-left: -35px;
+}
+ul li{
+    display: inline-block;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #fff;
+    margin: 3px;
+}
+ul .color{
+   background: #ff5000;
+}
+a{
+    /* 让a标签不显示 */
+    display: none;
+    width: 20px;
+    height: 30px;
+    line-height: 30px;
+    text-decoration: none;
+    text-align: center;
+    font-size: 20px;
+    color: #fff;
+    background: rgba(255,255,255,.3);
+    /* 此处没有定义ul的宽度
+    并且用绝对定位的情况下，居中不能用margin:auto 
+    以下方法可以解决*/
+    top: 50%;
+    margin-top: -15px;
+}
+.box>a:hover{
+    background: #444444;
+}
+#left{
+    position: absolute;
+    left: -3px;
+    border-top-right-radius: 50%;
+    border-bottom-right-radius: 50%;
+}
+#right{
+    position: absolute;
+    right: -3px;
+    border-top-left-radius: 50%;
+    border-bottom-left-radius: 50%;
+}
+/* 让a标签在鼠标移入界面时显示 */
+.box:hover a{
+    display: block;
+}

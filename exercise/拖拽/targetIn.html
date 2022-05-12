@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>拖放</title>
+    <style>
+        .one, .two{
+            width: 100px;
+            height: 100px;
+            background: #ccc;
+            margin-top: 10px;
+            line-height: 100px;
+            text-align: center;
+        }
+        .box{
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 500px;
+            height: 500px;
+            border: 1px solid black;
+        }
+    </style>
+</head>
+<body>
+        <!-- 
+            dragstart 被拖放元素 开始被拖拽时触发
+            drag 被拖放元素 在拖拽的过程中触发        
+            dragend 被拖放元素 拖拽完成时    
+
+            dragenter 目标元素 拖放元素进入目标元素       
+            dragover 目标元素 拖放元素在目标元素上时  
+            dragleave 目标元素 拖放元素在目标元素上离开
+            drop 目标元素 被拖放的元素在目标元素上同时鼠标放开触发的事件 
+        注：需要阻止dragover的默认行为才会触发drop事件 -->
+
+    <div class="one" draggable="true">one</div>
+    <div class="two" draggable="true">two</div>
+    <div class="box"></div>
+    <script>
+        var one = document.getElementsByClassName('one')[0],
+            two = document.getElementsByClassName("two")[0],
+            box = document.getElementsByClassName("box")[0];
+        one.addEventListener('dragstart',function(e){
+            var dt = e.dataTransfer;
+            dt.setData('drag',this.className)
+        })
+        two.addEventListener('dragstart',function(e){
+            var dt = e.dataTransfer;
+            dt.setData('drag',this.className)
+        })
+        // one.addEventListener('drag',function(){
+        //     console.log('drag')
+        // })
+        // one.addEventListener('dragend',function(){
+        //     console.log('dragend')
+        // })
+        // box.addEventListener('dragenter',function(){
+        //     console.log('dragenter')
+        // })
+        box.addEventListener('dragover',function(e){
+            e.preventDefault();
+        })
+        // box.addEventListener('dragleave',function(){
+        //     console.log('dragleave')
+        // })
+        box.addEventListener('drop',function(e){
+            var dt = e.dataTransfer;
+            var text = dt.getData('drag')
+            box.appendChild(document.getElementsByClassName(text)[0]);
+        })
+       </script>
+</body>
+</html>

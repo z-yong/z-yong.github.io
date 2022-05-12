@@ -1,0 +1,90 @@
+body,ul,li{
+    margin: 0;
+    padding: 0;
+}
+ul{
+    list-style-type: none;
+}
+.continue{
+    width: 1000px;
+    margin: 40px auto 0;
+    background: #808080;
+}
+.continue>div{
+    height: 45px;
+    width: 800px;
+    margin: auto;
+}
+.continue>div>.nav-list::before{
+    display: table;
+    content: "";
+}
+.continue>div>.nav-list::after{
+    display: table;
+     content: "";
+    clear: both;
+}
+.continue>div>.nav-list>li{
+    display: block;
+    float: left;
+    height: 46px;
+    line-height: 45px;
+    padding-left: 20px;
+    position: relative;
+    z-index: 99;
+} 
+.continue>div>.nav-list>li>a{
+    display: block;
+    text-decoration: none;
+    color: #fff;
+    font-size: 18px;
+    height: 45px;
+    border: 1px solid #808080;
+    border-bottom: none;
+    padding: 0 10px;
+}
+.continue>div>.nav-list>li>a:hover{
+    color: #bc0303;
+    background: #fff;
+    border-top: 1px solid #c9c9c9;
+}
+/* 二级菜单 */
+.nav-list>li>.list-menus{
+    display: none;
+}
+.nav-list>.item>.list-menus{
+    display: block;
+    border: 1px solid #c9c9c9;
+    border-top: none;
+    width: 140px;
+    position: absolute;
+    z-index: 1;
+} 
+.nav-list>.item>.list-menus>.menus-ul>li{
+    padding: 8px 0 12px 10px; 
+    /* 设置行高 否则行高会是默认行高 */
+    line-height: 16px;
+}
+.nav-list>.item>.list-menus>.menus-ul>li>a{
+    color: #808080;
+    text-decoration: none;
+}
+.nav-list>.item>.list-menus>.menus-ul>li>a:hover{
+    text-decoration: underline;
+}
+
+.continue>div>.nav-list>.item>a{
+    border: 1px solid #c9c9c9;
+    border-bottom: none;
+    color: #bc0303;
+    /* 此处必须设置背景 */
+    background: #fff;
+}
+/* 让人才招聘二级菜单下拉框扩大 */
+.nav-list>.item>.renshi{
+    width: 280px;
+}
+.nav-list>.item>.renshi>.menus-ul>li{
+    float: left;
+    width: 120px;
+}

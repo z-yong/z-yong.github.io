@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>返回字符串中出现最多的字符</title>
+</head>
+<body>
+    <script>
+        var ary = []
+        function test(str){
+            var arr = [];
+            for(var i = 0; i < str.length - 1; i++){
+                ary[i] = []; //定义一个数组 数组名随i值变动 也就是同时定义了不同的数组
+                for(var j = i + 1; j < str.length; j++){
+                    if(str[i] == str[j]){
+                        ary[i].push(str[i]);
+                    }
+                }
+                arr.push(ary[i].length);
+            }
+            var max = arr[0];
+            for(var i = 1; i < arr.length; i++){
+                if(max < arr[i]){
+                    max = arr[i];
+                    var char = ary[i][0];
+                }
+            }
+            var aa = "字符串中出现最多的字符是" + char + ",出现了"+(max+1) + "次";
+            return aa;
+        }
+
+
+        var a = "aldd3/dhdfdlssslllyhdffyffhlu.f"
+        // 利用对象属性不能重复的特性
+        function fn(str){
+            var obj = {};
+            var maxKey = 0;
+            var maxName = [];
+            for(var i = 0; i < str.length; i++){
+                key = str[i];
+                if(obj[key]){//当这个属性已经存在时 该属性对应的值+1
+                    obj[key] ++;
+                }else{
+                    obj[key] = 1;//当这个属性不存在时 添加该属性 并给其赋值1
+                }
+            }
+            for(var name in obj){
+                if(maxKey < obj[name]){
+                    maxKey = obj[name]
+                }
+            }
+            for (var name in obj){//避免出现次数最多的字符不止一个 将最大值与对象中属性值重新比较 如果相等 就添加属性名
+                if(maxKey == obj[name]){
+                    maxName.push(name);
+                }
+            }
+            return "字符串出现最多的是：" + maxName + "，出现次数是：" + maxKey;
+        }
+    </script>
+</body>
+</html>

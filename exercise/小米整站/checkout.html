@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <title>填写订单信息</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/checkout.css">
+    <link rel="stylesheet" href="css/iconfont.css">
+</head>
+<body>
+    <div class="miniheader">
+        <div class="container">
+            <div class="miniheader-logo"><a href="index.html" title="首页">小米官网</a></div>
+            <div class="miniheader-title ">
+                <h2>确认订单</h2>
+                <p>温馨提示：产品是否购买成功，以最终下单为准哦，请尽快结算</p>
+                
+            </div>
+            <div class="miniheader-info">
+                <i class="iconfont">&#x221a;</i>
+                <a href="#" class="user-name"><span></span></a>
+                <span class="sep">|</span>
+                <a href="#" class="info-order">我的订单</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="checkout">
+        <div class="container">
+            <div class="checkout-box">
+                <div class="checkout-address clearfix">
+                    <p class="address-header">收货地址</p>
+                    <div class="address-body">
+                        <!-- 有select时候才会修改字样 -->
+                        <div class="address-item">
+                            <dl>
+                                <dt class="recipient"></dt>
+                                <dd class="phone"></dd>
+                                <dd class="area"></dd>
+                                <dd class="address"></dd>
+                            </dl>
+                            <div class="actions"><a href="javascript:;">修改</a></div>
+                        </div>
+
+                        <div class="address-item address-new">
+                            <i class="iconfont">&#xe609;</i>
+                            添加新地址
+                        </div>
+                    </div>
+                </div>
+                <div class="checkout-goods">
+                    <p class="goods-header">商品</p>
+                    <div class="goods-body">
+                        <ul class="goods-list clearfix">
+                            <li class="clearfix">
+                                <div class="goods-img"><img alt=""></div>
+                                <div class="goods-name"><a href="#"></a></div>
+                                <div class="goods-price"></div>
+                                <div class="goods-total"></div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="checkout-count clearfix">
+                    <div class="count-box">
+                        <ul>
+                            <li>
+                                <label>商品件数：</label>
+                                <span><span class="total-quantity"></span>件</span>
+                            </li>
+                            <li>
+                                <label>商品总价：</label>
+                                <span class="total-price"><span class="price"></span>元</span>
+                            </li>
+                            <li>
+                                <label>活动优惠：</label>
+                                <span>-0元</span>
+                            </li>
+                            <li>
+                                <label>优惠券抵扣：</label>
+                                <span>-0元</span>
+                            </li>
+                            <li>
+                                <label>运费：</label>
+                                <span>0元</span>
+                            </li>
+                            <li class="total-price">
+                                <label>应付总额：</label>
+                                <span><em class="price"></em>元</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="checkout-bar clearfix">
+                    <div class="bar-btn"><a href="javascript:;" id="checkout">提交订单</a></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="edit-bg" style="display: none"></div>
+    <div class="edit-address" style="display: none">
+        <div class="edit-header">
+            <span class="title">添加收货地址</span>
+            <a href="javascript:;" class="close"><i class="iconfont">&#xe602;</i></a>
+        </div>
+        <div class="edit-body">
+            <form class="body-form clearfix">
+                <input type="hidden" name="address_id">
+                <div class="form-section form-name">
+                    <!-- <label>收件人</label> -->
+                    <input type="text" name="recipient" class="input-text name-input" value="" placeholder="收货人姓名">
+                </div>
+                <div class="form-section form-phone">
+                    <!-- <label>手机号</label> -->
+                    <input type="text" name="phone" class="input-text phone-input" value="" placeholder="手机号">
+                </div>
+                <div class="form-section form-area">
+                    <input type="text" name="area" class="input-text area-input" value="" placeholder="选择省 / 市 / 区 / 街道">
+                </div>
+                <div class="form-section form-detail">
+                    <!-- <label>详细地址</label> -->
+                    <textarea type="textarea" name="address" class="input-text detail-input"  placeholder="详细地址，路名或街道名称，门牌号"></textarea>
+                </div>
+            </form>
+
+            <!-- <div class="form-select">
+                <span class="select-close">x</span>
+                <div class="select-box clearfix">
+                    <div class="select-item" data-init-txt="选择省份/自治区">选择省份/自治区</div>
+                    <div class="select-item " data-init-txt="选择城市/地区">选择城市/地区</div>
+                    <div class="select-item hidden" data-init-txt="选择区县">选择区县</div>
+                    <div class="select-item hidden" data-init-txt="选择配送区域">选择配送区域</div>
+                </div>
+                <div class="option-box">
+                    <ul class="option-list clearfix">
+                        <li date-value="2" data-txt="北京">北京</li>
+                        <li date-value="3" data-txt="上海">上海</li>
+                    </ul>
+                    <ul class="option-list clearfix hidden">
+                        <li date-value="108" data-txt="上海市">上海市</li>
+                    </ul>
+                    <ul class="option-list clearfix hidden">
+                        <li date-value="2" data-txt="黄浦区">黄浦区</li>
+                        <li date-value="3" data-txt="虹口区">虹口区</li>
+                        <li date-value="2" data-txt="黄浦区">黄浦区</li>
+                        <li date-value="3" data-txt="虹口区">虹口区</li>
+                        <li date-value="2" data-txt="黄浦区">黄浦区</li>
+                        <li date-value="3" data-txt="虹口区">虹口区</li>
+                        <li date-value="2" data-txt="黄浦区">黄浦区</li>
+                        <li date-value="3" data-txt="虹口区">虹口区</li>
+                        <li date-value="2" data-txt="黄浦区">黄浦区</li>
+                        <li date-value="3" data-txt="虹口区">虹口区</li>
+                    </ul>
+                    <ul class="option-list clearfix hidden">
+                        <li date-value="2" data-txt="白鹤镇">白鹤镇</li>
+                        <li date-value="3" data-txt="康桥镇">康桥镇</li>
+                        <li date-value="2" data-txt="白鹤镇">白鹤镇</li>
+                        <li date-value="3" data-txt="康桥镇">康桥镇</li>
+                        <li date-value="2" data-txt="白鹤镇">白鹤镇</li>
+                        <li date-value="3" data-txt="康桥镇">康桥镇</li>
+                    </ul>
+                </div>
+            </div> -->
+
+        </div>
+        <div class="edit-footer">
+            <a href="javascript:;" class="btn btn-primary confirm">保存</a>
+            <a href="javascript:;" class="btn btn-gray close">取消</a>
+        </div>
+    </div>
+
+<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+<script src="js/api.js"></script>
+<script>
+    $(function(){
+       // 获取域名拼接参数ids的值
+        const ids = new URLSearchParams(location.search).get('ids')
+        if(!ids){
+            window.alert('未选择商品');
+            // window.history.back();
+            location.href = 'index.html'
+            return;
+        }
+        // 定义一个用户地址编号
+        let addr_id;
+        // console.log(ids)ids就当前用户选中的商品编号,以逗号隔开
+        const edit = $('.edit-bg, .edit-address');
+        const primary = $('.btn-primary');
+        const gray = $('.close');
+        const bodyForm = $('.body-form');        
+        const addressBody = $('.address-body');
+        const addressItem =  $('.address-item').first().remove();
+        $.apiGet('/user/addressList').then(function(result){
+            if(!result.length){
+                edit.show();
+            }
+            result.forEach(function(ele,index){
+                addAddress(ele);
+            })
+           
+        })
+        // 保存
+        primary.click(function(){
+            const data = bodyForm.serialize();                
+            $.apiPost('/user/updateAddress',data).then(function(result){
+                addAddress(result);
+                edit.hide();        
+            })
+            
+        })
+        gray.click(function(){
+            edit.hide()
+        })
+        $('.address-new').click(function(){
+            bodyForm.find('input,textarea').val('');
+            edit.find('.edit-header .title').text('添加收获地址')
+            edit.show();
+        })
+        // 修改地址
+        $('.address-body').on('click','.actions a',function(){
+            edit.find('.edit-header .title').text('编辑收获地址')
+            edit.show();
+            const data = $(this).data('json'); //取出之前村存储的地址信息
+            for(const key in data){
+                edit.find('input[name='+key+'],textarea[name='+ key +']' ).val(data[key]);
+
+            }
+        })
+        // 添加地址方法
+        function addAddress(result){
+            //存储一个dom 用来判断当前用户是新增地址还是修改地址
+            // 如果是修改 那么item就会村子 反之不存在
+            const item = $('.address-item[data-id='+ result.address_id +']'); 
+            // 如果item存在 那么就不克隆 当用户保存时 就不会新增dom 而是覆盖
+            const address = item.length > 0 ? item : addressItem.clone();
+            address.attr('data-id',result.address_id);
+            address.find('.actions a').data('json',result);//存储信息 方便修改时调用
+            address.find('.recipient').text(result.recipient);
+            address.find('.phone').text(result.phone);
+            address.find('.area').text(result.area);
+            address.find('.address').text(result.address);
+            if(!item.length){ //这个判断只是为了节省性能 当存在这个地址 只需要改变其内容 就不用重新渲染了
+                addressBody.prepend(address);
+            } 
+            ad(address)    //默认选中最新地址
+        }
+    //    选中地址
+        addressBody.on('click','.address-item',function(){
+            ad(this)
+        })
+        function ad(dom){
+            $(dom).siblings().removeClass('select').find('.actions a').hide();
+            $(dom).addClass('select').find('.actions a').show();
+            addr_id = $(dom).attr('data-id');
+        }
+
+        const goods = $('.goods-list');
+        const liGoods = goods.find('.clearfix').remove();
+
+        // 获取用户选中的购物车商品
+        $.apiGet('/user/cart?ids=' + ids).then(function(result){
+            let str = '';
+            let quantityAll = 0;
+            let priceAll = 0;
+            result.forEach(function(ele,index){
+                str += `<li class="clearfix">
+                            <div class="goods-img"><img src=${ele.imgs[0]} alt=""></div>
+                            <div class="goods-name"><a href="product.html?pid=${ele.pid}">${ele.name}</a></div>
+                            <div class="goods-price">${ele.price} x ${ele.quantity}</div>
+                            <div class="goods-total">${ele.quantity * ele.price}</div>
+                        </li>`
+                quantityAll += +ele.quantity;
+                priceAll += ele.quantity * ele.price
+            })
+            goods.append(str);
+            $('.checkout-count .count-box').find('.total-quantity').text(quantityAll);
+            $('.checkout-count .count-box').find('.price').text(priceAll + '.00');
+        })
+        // 提交订单
+        $('#checkout').click(function(){
+            if(addr_id){
+                $.apiPost('/user/checkout',{ids: ids, address_id: addr_id}).then(function(result){
+                    window.location.href = 'confirm.html?order_no=' + result
+                })
+            }else{
+                window.alert('请先选择收货地址')
+            }
+        })
+
+
+    })
+
+</script>
+
+</body>
+</html>

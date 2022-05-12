@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>jQuery分页插件</title>
+    <link rel="stylesheet" href="./index.css">
+</head>
+<body>
+    <div class="box">
+        <div class="main">
+            <ul class="mainList">
+                <li>我是main 1 内容  此处省略一万字</li>
+                <li>我是main 2 内容  此处省略一万零一字..</li>
+                <li>我是main 3 内容  此处省略一万零二字......</li>
+                <li>我是main 4 内容  此处省略一万零三字.........</li>
+                <li>我是main 5 内容  此处省略一万零四字..............</li>
+                <li>我是main 6 内容  此处省略一万零五字....................</li>
+                <li>我是main 7 内容  此处省略一万零六字...........................</li>
+                <li>我是main 8 内容  此处省略一万零七字.................................</li>
+                <li>我是main 9 内容  此处省略一万零八字.........................................</li>
+                <li>我是main 10 内容  此处省略一万零九字....................................................</li>
+            </ul>
+        </div>
+        <div class="wrapper">
+            <ul class="pageList">
+                <!-- <li><a class="prev" href=""><上一页</a></li>
+                <li><a href="">1</a></li>
+                <li class="this-page"><span>1</span></li>
+                <li><a href="">2</a></li>
+                <li><a href="">3</a></li>
+                <li><a href="">4</a></li>
+                <li><a href="">5</a></li>
+                <li><a href="">6</a></li>
+                <li><a href="">7</a></li>
+                <li class="this-page"><span>. . .</span></li>
+                <li><a class="gray" href="">下一页></a></li>
+                <li><a class="next" href="">下一页></a></li> -->
+            </ul>
+            <div class="boxPage">
+                共<span class="pages"></span>页&nbsp;&nbsp;
+                跳转到第<input class="sel" type="text">页
+                <button>确定</button>
+            </div>
+        </div>
+        
+    </div>
+    <script src="./jquery-3.4.1.min.js"></script>
+    <script src="./index.js"></script>
+    <script>
+        $('.pageList').paging({
+            current: 1,
+            allPage: 10
+        },$(".pages"),$('.mainList>li'),$('button'),$('.sel'))
+    </script>
+</body>
+</html>

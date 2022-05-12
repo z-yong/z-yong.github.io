@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>质数</title>
+</head>
+<body>
+    <script>
+        // 条件： 只能被自身和1整除的数才是质数
+
+        // 判断实参是否为质数
+        function test (n){
+            if(n <= 1 || n % 2 == 0){
+                if(n == 2){//质数中只有2能被2整除
+                    return true;
+                }
+                return false;
+            }
+            var i = 3;
+            while(i < n){
+                if(n % i == 0){
+                    return false;
+                }
+                i += 2;
+            }
+            return true;
+        }
+        // 返回num以内的所有质数
+        function zhishu(num){
+            var numArr = [];
+            for(var i = 0; i < num; i++){
+                if(test(i)){
+                    numArr.push(i);
+                }
+            }
+            return numArr;
+        }
+    
+    </script>
+</body>
+</html>

@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>删除列表</title>
+    <style>
+        body,ul,li{
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+        .list li{
+            width: 200px;
+            height: 40px;
+            text-align: center;
+            line-height: 40px;
+            background: #ccc;
+            margin-top: 10px;
+        }
+        .remove{
+            margin-top: 20px;
+            width: 400px;
+            height: 300px;
+            border: 1px solid black;
+        }
+    </style>
+</head>
+<body>
+    <div>
+        <ul class="list">
+            <li draggable = 'true'>1</li>
+            <li draggable = 'true'>2</li>
+            <li draggable = 'true'>3</li>
+            <li draggable = 'true'>4</li>
+            <li draggable = 'true'>5</li>
+        </ul>
+    </div>
+    <div class="remove">垃圾框</div>
+    <script>
+        var li = document.getElementsByTagName('li');
+        var list = document.getElementsByClassName('list')[0];
+        var remove = document.getElementsByClassName("remove")[0];
+
+        function liEvent(){
+            var len = li.length;
+            // 这里由于是要执行删除元素 当某个元素被删除时 其li的下标也会随之改变 所以这里不能用立即执行函数 
+            for(var i = 0; i < len; i++){
+                li[i].addEventListener('dragstart',function(e){
+                    var dt = e.dataTransfer;
+                    var index = seek(li,this)
+                    // 将当前下标存放于数据中
+                    dt.setData('drag',index);
+                },false)
+                li[i].addEventListener('dragover',function (e){
+                    e.preventDefault();
+                })
+                li[i].addEventListener('drop',function(e){
+                    var dt = e.dataTransfer;
+                    var index = dt.getData('drag');
+                    list.insertBefore(li[index],this);
+                })
+            }
+        }
+        liEvent();
+        // 比较当前元素 拿出其下标
+        function seek(li,elem){
+            var len = li.length;
+            for(var i = 0; i < len; i++){
+                if(li[i] == elem)
+                return i;
+            }
+        }
+
+        remove.addEventListener('dragover',function(e){
+            e.preventDefault();
+        })
+        remove.addEventListener('drop',function(e){
+            var dt = e.dataTransfer;
+            var index = dt.getData('drag');
+            console.log(index)
+            li[index].remove();
+        })
+    </script>
+</body>
+</html>

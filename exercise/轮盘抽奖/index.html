@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>王者荣耀点卷夺宝</title>
+    <style>
+        table,tr,td{
+            margin: 0;
+            padding: 0;
+        }
+        #box{
+            margin: 80px auto;
+            height: 500px;
+            position: relative;
+        }
+        #box table{
+            margin: 0 auto;
+        }
+
+        #box td{
+            /* width: 180px;
+            height: 120px;*/
+            user-select: none;
+            background: #a25; 
+            text-align: center;
+            border-radius: 5px;
+            /* border: #ff6700 solid 3px; */
+        }
+        
+        #box .start{
+            background: #ff6700;
+            font-size: 50px;
+            cursor: pointer;
+        }
+        #box td img{
+            width: 180px;
+            height: 120px;
+            border-radius: 10px;
+        }
+        #color{
+            background:blue;
+            opacity: 0.5;
+        }
+        .prize{
+            display: none;
+            width: 550px;
+            height: 260px;
+            /* border: 1px solid black;*/
+            border-radius: 7px;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            margin-left: -275px;
+            margin-top: -130px;
+            text-align: center;
+            background: blueviolet;
+        }
+        .block{
+            display: block;
+        }
+        .prize span{
+            display: block;
+            font-size: 50px;
+            /* width: 500px; */
+        }
+        .prize .img{
+            display: block;
+            width: 240px;
+            height: 130px;
+            margin: 5px auto 0;
+        }
+        a{
+            display: block;
+            width: 240px;
+            height: 50px;
+            line-height: 50px;
+            color: aqua;
+            /* border: 1px solid #ff6700; */
+            color: sandybrown;
+            background: #f30;
+            opacity: 0.6;
+            font-size: 30px;
+            font-family: '微软雅黑';
+            text-align: center;
+            text-decoration: none;
+            position: absolute;
+            left: 50%;
+            margin-left: -120px;
+            bottom: 4px;
+        }
+    </style>
+</head>
+<body>
+    <div id="box">
+        <table>
+            <tr>
+                <td><img src="img/01.jpg" alt=""></td>
+                <td><img src="img/02.jpg" alt=""></td>
+                <td><img src="img/03.jpg" alt=""></td>
+                <td><img src="img/04.jpg" alt=""></td>
+                <td><img src="img/05.jpg" alt=""></td>
+            </tr>
+            <tr>
+                <td><img src="img/14.jpg" alt=""></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td><img src="img/06.jpg" alt=""></td>
+            </tr>
+            <tr>
+                <td><img src="img/13.jpg" alt=""></td>
+                <td></td>
+                <td class="start">开始</td>
+                <td></td>
+                <td><img src="img/07.jpg" alt=""></td>
+            </tr>
+            <tr>
+                <td><img src="img/12.jpg" alt=""></td>
+                <td><img src="img/11.jpg" alt=""></td>
+                <td><img src="img/10.jpg" alt=""></td>
+                <td><img src="img/09.jpg" alt=""></td>
+                <td><img src="img/08.jpg" alt=""></td>
+            </tr>
+        </table>
+        <div class="prize">
+            <span>恭喜你！获得</span> 
+            <img class="img" alt=""> 
+            <a href="javascript:;">确  定</a>
+        </div>
+    </div>
+
+    <script>
+        var tdList = document.getElementsByTagName("td");
+        var start = document.getElementsByClassName("start")[0];
+        var div = document.getElementsByTagName("div")[1];
+        var img = document.getElementsByClassName("img")[0];
+        var aa = document.getElementsByTagName("a")[0];
+        
+        var numMax;
+        var lock = true;
+        var timer;
+        
+        start.addEventListener("click",startA,false)
+
+        function startA(){
+            if(lock){
+                // tdList[0].id = "color"
+                lock = false;
+                num = 0;
+                var N = Math.random()*10;
+                // var ss = Math.floor(Math.random()*14);
+                // 获取奖品几率
+                if(N<5){
+                    numRan = 2 + Math.floor(Math.random()*3);
+                }else if(N<8){
+                    numRan = 7 + Math.floor(Math.random()*2);
+                }else if(N<9){
+                    numRan = 10 + Math.floor(Math.random()*2);
+                }else if(N<9.5){
+                    numRan = 5 + Math.floor(Math.random()*2);
+                }else if(N<9.8){
+                    numRan = 9;
+                }else if(N<9.9){
+                    numRan = 12 + Math.floor(Math.random()*2);
+                }else if(N<9.99){
+                    numRan = 1;
+                }else {
+                    numRan = 0;
+                }
+                console.log(numRan)
+                numMax = 14*3 + numRan;
+                // ssss= 14*3 + numRan + ss;
+                timer = setInterval(startDrow,200);
+                setTimeout(prizeApp,4000);
+            }
+        }
+        
+        // 抽到某个奖品 让其显示
+        var arr = ["img/01.jpg","img/02.jpg","img/03.jpg","img/04.jpg","img/05.jpg","img/06.jpg","img/07.jpg",
+        "img/08.jpg","img/09.jpg","img/10.jpg","img/11.jpg","img/12.jpg","img/13.jpg","img/14.jpg"]
+        function prizeApp(){
+            for(var i = 0; i < arr.length; i++){
+                if(numRan == i){
+                    div.className = "prize block";
+                    img.src = arr[i];
+                }
+            }
+        }
+        var index = 0;
+        var indexArr = [0,1,2,3,4,9,14,19,18,17,16,15,10,5]
+        var num = 0;
+        var a = 0;
+        var endA = 4000;
+        function startDrow(){
+            tdList[indexArr[index]].id = "";
+            index = index+1 >= indexArr.length ? 0 : index+1;          
+            tdList[indexArr[index]].id = "color"; 
+            
+            num ++;
+            if(num == 6){
+                clearInterval(timer);
+                timer = setInterval(startDrow,30);
+            }
+            if(num == (numMax - 6)){
+                clearInterval(timer);
+                timer = setInterval(startDrow,200);
+            }
+            if(num >= numMax){
+                clearInterval(timer);
+                // timer3 = setTimeout(function(){
+                //     timer = setInterval(startDrow,20)
+                // },1000)
+                return;
+            }
+            // if(num>=ssss){
+            //     clearInterval(timer);
+            //     clearTimeout(timer3);
+            //     lock = true;
+            // }
+        }
+
+        aa.addEventListener("click",function(){
+            // 锁只能在这里解开才最完美
+            lock = true;
+            div.className = "prize";
+            index = 0;//当点击确定时 初始化下标值  此时用户再点击开始时相当于重新开始了
+            // console.log(numRan)
+            // tdList[0].id = "color";
+            tdList[indexArr[numRan]].id = "";
+        })
+
+    </script>
+</body>
+</html>

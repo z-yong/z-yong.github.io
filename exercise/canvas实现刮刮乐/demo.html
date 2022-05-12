@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>绘画</title>
+    <style>
+        canvas{
+            position: absolute;
+            top: 0;
+        }
+    </style>
+</head>
+<body>
+    <canvas width="400" height="400"></canvas>
+    <script>
+        var can = document.getElementsByTagName("canvas")[0];
+        var ct = can.getContext('2d');
+        function hua(){
+            for(var i = 0 ; i < 80; i++){
+                ct.beginPath();
+                ct.arc(300,300,30,0,Math.PI*2);
+                ct.globalAlpha = 0.5;
+                ct.fillStyle = 'red'
+                ct.fill();
+                ct.transform(0.95,0,0,0.95,10,10);
+                ct.rotate(30);
+            }
+        }
+        // hua();
+        function hua2(){
+            ct.translate(240,100)
+            for(var i = 0 ; i < 80; i++){
+                ct.transform(0.95,0,0,0.95,30,30);
+                ct.rotate(Math.PI/12);
+                ct.beginPath();
+                ct.fillStyle = 'red'
+                ct.globalAlpha = 0.5;
+                ct.arc(0,0,50,0,Math.PI*2);
+                ct.closePath();
+                ct.fill();
+                
+            }
+        }
+        // hua2();
+
+        // 随机透明圆
+        var coo = {}
+        function hua3(){
+            can.width = 1200;
+            can.height = 600;
+            ct.globalAlpha = 0.7;
+            for(var i = 0; i < 60; i++){
+                coo.r = Math.random()*255;
+                coo.g = Math.random()*255;
+                coo.b = Math.random()*255;
+                coo.rr = Math.random()*50;
+                coo.x = Math.random()*can.width;
+                // 这里判断一下 否则会有最上边的圆不完整
+                var y = Math.random()*can.height;
+                coo.y = y > 50 ? y : 50;
+                ct.beginPath();
+                ct.fillStyle = 'rgb('+ coo.r + ',' + coo.g + ',' + coo.b + ')';
+                ct.arc(coo.x, coo.y, coo.rr, 0, Math.PI*2);
+                ct.closePath();
+                ct.fill();
+            }
+        }
+        // hua3();    
+       
+        var coo2 = {};
+        function hua4(){
+            can.width = 1200;
+            can.height = 600;
+            ct.globalAlpha = 0.7;
+            setInterval(paint,100);
+        }
+        function paint(){
+            coo2.r = Math.random()*255;
+            coo2.g = Math.random()*255;
+            coo2.b = Math.random()*255;
+            coo2.rr = Math.random()*50;
+            coo2.x = Math.random()*can.width;
+            coo2.y = coo2.rr;
+            ct.beginPath();
+            ct.fillStyle = 'rgb('+ coo2.r + ',' + coo2.g + ',' + coo2.b + ')';
+            ct.arc(coo2.x, coo2.y, coo2.rr, 0, Math.PI*2);
+            ct.closePath();
+            ct.fill();
+        }
+        hua4();
+    </script>
+</body>
+</html>

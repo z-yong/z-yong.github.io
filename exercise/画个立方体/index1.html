@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>立方体第一种写法</title>
+
+    <style>
+        .bigBox{
+            perspective: 2000px;
+            /* width: 300px;
+            height: 300px;
+            margin: 100px auto; */
+        }
+        .box{
+            position: relative;
+            width: 300px;
+            height: 300px;
+            margin: 100px auto;
+            transform-style: preserve-3d; 
+            /* 因为此时box元素的位置在最前方 中心点也是在最前方的元素中心 所以需要将中心点位置向后移动150px 该元素就会以自身的中心进行旋转 */
+            transform-origin: 50% 50% -150px;
+            animation: rot 3s linear infinite;
+        }
+        @keyframes rot{
+            0%{
+                /* transform: rotate(30deg) rotateX(0) rotateY(0); */
+                transform: rotate3d(1,1,1 0)
+            }
+            100%{
+                /* transform: rotate(30deg) rotateX(360deg) rotateY(360deg) */
+                /* 沿着立方体的对角线旋转  前面三个值分别是x y z三个方向的矢量值 的合力*/
+                transform: rotate3d(1,1,1,360deg)
+            }
+        }
+        .box div{
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 300px;
+            height: 300px;
+            text-align: center;
+            line-height: 300px;
+        }
+        .box div:nth-child(1){
+            background: rgba(255,62,85,0.5);
+        }
+        .box div:nth-child(2){
+            background: rgba(55,66,33,0.5);
+            transform-origin: right 50%;
+            transform: rotateY(270deg);
+        }
+        .box div:nth-child(3){
+            background: rgba(9,14,12,0.5);
+            transform: translateZ(-300px);
+        }
+        .box div:nth-child(4){
+            background: rgba(5,2,35,0.5);
+            transform-origin: left 50%;
+            transform: rotateY(90deg);
+        }
+        .box div:nth-child(5){
+            background: rgba(105,62,185,0.5);
+            transform-origin: 50% top;
+            transform: rotateX(270deg);
+        }
+        .box div:nth-child(6){
+            background: rgba(165,62,85,0.5);
+            transform-origin: 50% bottom;
+            transform: rotateX(90deg);
+        }
+    </style>
+</head>
+<body>
+    <div class="bigBox">
+        <div class="box">
+            <div>1</div>
+            <div>22</div>
+            <div>333</div>
+            <div>4444</div>
+            <div>55555</div>
+            <div>666666</div>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>小组件</title>
+    <style>
+        .wrapper{
+            width: 100px;
+            height: 30px;
+            display: flex;
+            justify-content: space-between;
+            margin: 100px auto;
+            background: #ccc;
+        }
+        span{
+            display: inline-block;
+            width: 30px;
+            line-height: 30px;
+            text-align: center;
+            font-size: 18px;
+            color: #222;
+            cursor: pointer;
+            user-select: none;
+        }
+        /* 取消小箭头 */
+        input::-webkit-outer-spin-button,
+        input::-webkit-inner-spin-button{
+                -webkit-appearance:none;
+        }
+        input{
+            
+            width: 35px;
+            text-align: center;
+            line-height: 35px;
+            outline: none;
+        }
+        .hide{
+            color: #ccc;
+        }
+    </style>
+</head>
+<body>
+    最少一个最多二十个  多了连敲键盘也增加不了哦
+    <div class="wrapper">
+        <span class="min">-</span>
+        <input type="number" value="1">
+        <span class="add">+</span>
+    </div>
+    <script src="../../jQuery/jQuery文档/jquery-3.4.1.min.js"></script>
+    <script>
+
+        $('.wrapper').find('.min').click(function(){
+            changeValue(-1)
+        }).end().find('.add').click(function(){
+            changeValue(1)
+        })
+        // $('.min').add('.add').click(function(){
+        //     var num;
+        //     if(this == document.getElementsByClassName('min')[0]){
+        //         var num = -1;
+        //     }else{
+        //         var num = 1;
+        //     }
+        //     changeValue(num)
+        // })
+        $('input').on('input',function(){
+            changeValue(0)
+        })
+
+        function changeValue(num){
+            var value = Number($('input').val()) + num;
+            if(value <= 1){
+                value = 1
+            }
+            if(value >= 20){ 
+                value = 20
+            }
+            switch(value){
+                case 1 : 
+                    $('.min').addClass('hide');
+                    break;
+                case 20 : 
+                    $('.add').addClass("hide");
+                    break;
+                default:
+                    $('span').removeClass('hide');
+                    // $('.hide').removeClass('hide')
+            }
+            $('input').val(value);
+        }
+    </script>
+</body>
+</html>

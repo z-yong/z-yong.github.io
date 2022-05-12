@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+    <style>
+        /* body{
+            background: #000;
+        } */
+        div{
+            position: absolute;
+            width: 5px;
+            height: 5px;
+            background: aliceblue;
+        }
+        
+    </style>
+</head>
+<body>
+
+        <svg height="140" width="140">
+                <defs>
+                  <filter id="f4" x="0" y="0" width="200%" height="200%">
+                    <feOffset result="offOut" in="SourceGraphic" dx="10" dy="10" />
+                    <feColorMatrix result="matrixOut" in="offOut" type="matrix"
+                    values="0.2 0 0 0 0 0 0.2 0 0 0 0 0 0.2 0 0 0 0 0 1 0" />
+                    <feGaussianBlur result="blurOut" in="matrixOut" stdDeviation="10" />
+                    <feBlend in="SourceGraphic" in2="blurOut" mode="normal" />
+                  </filter>
+                </defs>
+                <rect width="90" height="90" stroke="green" stroke-width="1"
+                fill="yellow" filter="url(#f4)" />
+              </svg>
+
+
+
+    <script>
+        
+        function Snow(){
+            this.s = document.createElement('div');
+            
+            document.body.append(this.s)
+            this.x = 0;
+            this.speedX = 2;
+            this.startX = Math.floor(Math.random()*document.documentElement.clientWidth);
+            this.y = Math.floor(Math.random()*document.documentElement.clientHeight);
+            this.speedY = 1;
+            this.leftRan = Math.floor(Math.random()*10) + 10;
+            this.time = 10 + Math.floor(Math.random()*30);
+            this.fall();
+            
+        } 
+        Snow.prototype.fall = function(){
+            setInterval(function(){
+                this.x = this.speedX + this.x;
+                this.y = this.speedY + this.y;
+                if(this.x > this.leftRan)  this.speedX = -1;
+                if(this.x < -this.leftRan) this.speedX = 1;
+                if(this.y > document.documentElement.clientHeight - 30){
+                    this.y = 0;
+                } 
+                this.s.style.left = this.x + this.startX + 'px';
+                this.s.style.top = this.y + 'px';
+            }.bind(this),this.time)
+            console.log(this.time)
+        }
+        // for(var i = 0; i < 50; i ++){
+        //     new Snow();
+        // }
+    </script>
+</body>
+</html>

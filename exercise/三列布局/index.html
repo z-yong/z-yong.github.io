@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>三列布局</title>
+    <style>
+        body,ul,li{
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+        body{
+            background: #ccc;
+        }
+        .nav{
+            height: 50px;
+            background: #ddd;
+        }
+        ul{
+            display: flex;
+            justify-content: flex-end;
+            height: 100%;
+        }
+        li{
+            width: 100px;
+            height: 50px;
+            color: #fff;
+            text-align: center;
+            line-height: 50px;
+            /* 这个渐变颜色和老师写的一模一样 为啥效果不同 */
+            background: 
+                        linear-gradient(to right,#888,transparent 40%),
+                        linear-gradient(to right,transparent 60%,#888);
+                        /* linear-gradient(to left,#888, transparent); */
+        }
+        .nav ul li:hover{
+            box-shadow: -2px 2px 2px 2px #888;
+        }
+        .box{
+            display: flex;
+            height: 62%;
+            margin: 30px 0;
+        }
+        .left{
+            width: 200px;
+            height: 500px;
+            background: #9d0;
+        }
+        .right{
+            width: 200px;
+            height: 450px;
+            background: #0dd;
+        }
+        .main{
+            flex-grow: 1;
+            /* 这里一定要写一个宽度值并且在确保flex容器总宽度之内  否则当宽度大于总宽度时会按比例进行压缩 将两边都压缩了*/
+            width: 100px;
+            background: #df7;
+        }
+        .last{
+            height: 80px;
+            background: #f08;
+        }
+    </style>
+</head>
+<body>
+    <div class="nav">
+        <ul>
+            <li>1</li>
+            <li>2</li>
+            <li>3</li>
+            <li>4</li>
+            <li>5</li>
+        </ul>
+    </div>
+    <div class="box">
+        <div class="left">left</div>
+        <div class="main">main 大公司当所有好hj大公司当所有好干部人人呃二级呃the我为是否萨芬的萨达是的感hj大公司当所有好干部人人呃二级呃the我为是否萨芬的萨达是的感hj大公司当所有好干部人人呃二级呃the我为是否萨芬的萨达是的感hj大公司当所有好干部人人呃二级呃the我为是否萨芬的萨达是的感hj大公司当所有好干部人人呃二级呃the我为是否萨芬的萨达是的感hj大公司当所有好干部人人呃二级呃the我为是否萨芬的萨达是的感hj大公司当所有好干部人人呃二级呃the我为是否萨芬的萨达是的感hj大公司当所有好干部人人呃二级呃the我为是否hj大公司当所有好干部人人呃二级呃the我为是否萨芬的萨达是的感萨芬的萨达是的感hj大公司当所有好干部人人呃二级呃the我为是否萨芬的萨达是的感干部人人呃二级呃the我为是否萨芬的萨达是的感受hj大公司当所有好干部人人呃二级呃the我为是否萨芬的萨达是的感hj大公司当所有好干部人人呃二级呃the我为是否萨芬的萨达是的感hj大公司当所有好干部人人呃二级呃the我为是否萨芬的萨达是的感hj大公司当所有好干部人人呃二级呃the我为是否萨芬的萨达是的感hj大公司当所有好干部人人呃二级呃the我为是否萨芬的萨达是的感hj大公司当所有好干部人人呃二级呃the我为是否萨芬的萨达是的感到高度</div>
+        <div class="right">right</div>
+    </div>
+    <div class="last">last</div>
+</body>
+</html>

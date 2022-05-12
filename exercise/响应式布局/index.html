@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>响应式布局</title>
+    <link rel="stylesheet" href="./iconfont-3/iconfont.css">
+    <style>
+        body,ul,li{
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+        body{
+            background: #333;
+        }
+        a{
+            display: inline-block;
+            width: 60px;
+            height: 40px;
+            text-decoration: none;
+            color: #fff;
+        }
+        .nav{
+            height: 45px;
+            color: #fff;
+        }
+        .nav ul{
+            display: flex;
+            background: #000;
+            justify-content: space-around;
+        }
+        .nav .hide{
+            display: none;
+        }
+        .nav ul li{
+            height: 45px;
+            line-height: 45px;
+            text-align: center;
+        }
+        .nav ul li img{
+            width: 45px;
+        }
+        .main{
+            width: 60%;
+            margin: 80px auto;
+        }
+        .main ul{
+            display: flex;
+            justify-content: space-between;
+            flex-flow: wrap;
+        }
+        .main ul li{
+            border-top: 1px solid #ccc;
+            width: 35%;
+            height: 180px;
+            padding: 30px 0;
+            font-size: 18px;
+            color: #fff;
+            font-weight: 500;
+            box-sizing: border-box;
+        }
+        .nav2{
+            display: none;
+            padding: 0 12px;
+            justify-content: space-between;
+            height: 50px;
+            background: #000;
+        }
+        .nav2 li{
+            color: #fff;
+            height: 50px;
+            line-height: 50px;
+            font-size: 30px;
+            user-select: none;
+        }
+        .nav2 img{
+            width: 40px;
+        }
+        .nav2 li:nth-child(2){
+            cursor: pointer;
+        }
+        
+        @media screen and (max-width : 800px){
+            .nav2{
+                display: flex;
+            }
+            .nav ul{
+                /* display: block; */
+                background: #222;
+                flex-direction: column;
+                /* 当不需要定位时改变层级就需要用相对定位  */
+                position: relative; 
+                /* z-index: 10;      */
+            }
+            .nav ul li{
+                padding: 0 30px;
+                width: 80%;
+                align-self: center;
+                text-align: left;
+                border-bottom: 1px solid #ccc;
+            }
+            .nav ul li:nth-child(3){
+                display: none;
+            }
+            .nav ul li:nth-child(5){
+                border: none;
+            }
+            .main{
+                width: 100%;
+            }
+            .main ul li{
+                width: 900px;
+                height: 100px;
+                margin: 0 50px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div>
+        <ul class="nav2">
+            <li><img src="./logo.png" alt=""></li>
+            <li class="iconfont">&#xe86b;</li>
+        </ul>
+    </div>
+    <div class="nav">
+        <ul class="show">
+            <li><a href="#">Aimee</a></li>
+            <li><a href="#">CC</a></li>
+            <li><img src="./logo.png" alt=""></li>
+            <li><a href="#">Luwei</a></li>
+            <li><a href="#">小蝉</a></li>
+        </ul>
+    </div>
+    <div class="main">
+        <ul>
+            <li>我是Aimee呀我是Aimee呀我是Aimee呀</li>
+            <li>我是CC呀我是CC呀我是CC呀我是CC呀</li>
+            <li>我是Luwei呀我是Luwei呀我是Luwei呀</li>
+            <li>我是小蝉呀我是小蝉呀我是小蝉呀</li>
+        </ul>
+    </div>
+    <script>
+        var icon = document.getElementsByClassName('iconfont')[0];
+        var nav = document.getElementsByClassName('nav')[0];
+
+        var show = document.getElementsByClassName("show")[0];
+        (function (){
+            function fun(){
+                var num = 0;
+                icon.addEventListener('click',function(){
+                    if(num % 2 == 0){
+                        show.className = 'show hide'
+                    }else{
+                        show.className = 'show';
+                    }
+                    num ++;
+                })
+            }
+            return fun()}());
+    </script>
+</body>
+</html>

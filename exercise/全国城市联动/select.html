@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>全国城市联动</title>
+</head>
+<body>
+    <select name="" id="province">
+    </select>
+    <select name="" id="city"></select>
+    <select name="" id="district"></select>
+    <script src="cc.js"></script>
+    <script>
+        var province = document.getElementById("province");
+        var city = document.getElementById("city");
+        var district = document.getElementById("district");
+        // var provinceList = [{
+        //     name : "北京",
+        //     cityList :[{
+        //         name : "市辖区",districtList : ['东城区','西城区','崇文区']
+        //     },{
+        //         name : "县",districtList : ['密云县','延庆县'] 
+        //     }]
+        // },{
+        //     name : "安徽",
+        //     cityList : [{
+        //         name : "合肥市",districtList : ['市辖区','瑶海区','蜀山区','庐阳区']
+        //     },{
+        //         name : "六安市",districtList : ['金寨县','舒城县','霍邱县']
+        //     }]
+        // }];
+
+        // for(var i = 0; i < provinceList.length; i++){
+        //     var option = new Option(provinceList[i].name,provinceList[i].name);
+        //     province.options.add(option);
+        // }
+        addOption(provinceList,province);
+        
+        //初始化选项框
+        // city.options.add(new Option(provinceList[0].cityList[0].name,provinceList[0].cityList[0].name));
+        // district.options.add(new Option(provinceList[0].cityList[0].districtList[0]));
+        changeProvince();
+
+        province.addEventListener("change",changeProvince,false);
+
+        function changeProvince(){
+            var index = province.selectedIndex;
+            city.options.length = 0;//当用户点击时 先清空之前的内容
+            district.options.length = 0;
+            var dis = provinceList[index].cityList[0].districtList;
+            // 当用户点击省份选项时 也让区县选项框跟随联动 否则
+            for(var i = 0; i < dis.length; i++){
+                var optionD = new Option(dis[i],dis[i]);
+                district.options.add(optionD);
+            }
+           
+            //将长度提前拿出来 提升浏览器效率
+            var List = provinceList[index].cityList;
+            // for(var i = 0; i < List.length; i++){
+            //     var option = new Option(provinceList[index].cityList[i].name,provinceList[index].cityList[i].name);
+            //     city.options.add(option);
+            // }
+            addOption(List,city);
+        }
+
+        city.addEventListener("change",changeCity,false);
+
+        function changeCity(){
+            district.options.length = 0;//当用户点击时 先清空之前的内容
+            var indexC = this.selectedIndex;
+            var indexP = province.selectedIndex;
+            // console.log(indexC+"\t"+indexP);此时两个数值不一样 
+            var List = provinceList[indexP].cityList[indexC].districtList;
+            for(var i = 0; i < List.length; i++){
+                var option = new Option(provinceList[indexP].cityList[indexC].districtList[i],provinceList[indexP].cityList[indexC].districtList[i]);
+                district.options.add(option);
+            }
+        }
+
+        // 封装一个方法 用于添加option元素name值
+        function addOption(opts,site){
+            for(var i = 0; i< opts.length; i++){
+                var option = new Option(opts[i].name,opts[i].name);
+                site.options.add(option);
+            }
+        }
+
+    </script>
+</body>
+</html>

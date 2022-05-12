@@ -1,0 +1,668 @@
+body,
+ul,
+li {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+html {
+  width: 100%;
+  height: 100%;
+  /* filter: grayscale(1); */
+}
+
+body {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /* 这里的每张背景图片必须一模一样大小 否则效果很差 */
+  background-image: url('./img/1.jpg');
+  /* background-color: rgba(255, 255, 255, 0.2); */
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center center;
+  transition: 'background-image 3s linear'
+}
+
+.firstBox {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#starCanvas {
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 999;
+  pointer-events: none;
+}
+
+.box {
+  position: relative;
+  width: 1000px;
+  display: flex;
+  justify-content: space-between;
+  overflow: hidden;
+}
+
+/* 歌曲列表 */
+.songNameBox {
+  width: 350px;
+  margin-right: 30px;
+  background: #ccc;
+  border-radius: 40px;
+  opacity: 0.8;
+  user-select: none;
+  z-index: 1;
+}
+
+p {
+  color: #ff6700;
+  font-size: 24px;
+  text-indent: 1em;
+  font-weight: 500;
+}
+
+.songList {
+  padding: 15px;
+}
+
+.songList li {
+  position: relative;
+  height: 50px;
+  line-height: 50px;
+  font-size: 18px;
+  text-indent: 2em;
+  color: #000;
+  border-top: 2px solid #bbb;
+  /* cursor: default; */
+}
+
+.box li.color {
+  background: #fff;
+  color: #ff6700;
+  border-radius: 20px;
+}
+
+.box li .svg {
+  position: absolute;
+  left: 7px;
+  top: 13px;
+}
+
+.one {
+  display: block;
+  width: 20px;
+  height: 20px;
+  fill: #ff6700;
+  transform: rotate(180deg)
+}
+
+.wrapper {
+  max-width: 600px;
+  user-select: none;
+  margin-right: 70px;
+}
+
+.imgBox {
+  width: 200px;
+  height: 200px;
+  margin: 0 auto;
+  border-radius: 50%;
+  border: 50px solid #333;
+  /* animation: rot 5s linear infinite; */
+}
+
+.imgBox img {
+  width: 200px;
+  border-radius: 50%;
+}
+
+.lyrOne {
+  margin-top: 40px;
+  height: 40px;
+  line-height: 40px;
+  text-align: center;
+  color: aqua;
+  font-weight: 300;
+  font-size: 16px;
+}
+
+.songName {
+  width: 300px;
+  height: 30px;
+  color: #fff;
+  /* font-size: 18px; */
+  text-align: center;
+  line-height: 30px;
+  margin: 5px auto 0;
+}
+
+.audioBox {
+  position: relative;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  max-width: 540px;
+  height: 60px;
+  margin: 5px auto 0;
+  padding: 0 10px;
+  border-radius: 20px;
+  background: rgba(231, 221, 221, 0.6);
+}
+
+.audioBox>div .iconfont {
+  font-size: 30px;
+  cursor: default;
+}
+
+.audioBox div>.up,
+.audioBox>div>.down {
+  font-size: 25px;
+  /* 这里的字体虽然小了 但行高还是要和中间的播放键一样高 否则就不对齐了 */
+  line-height: 30px;
+}
+
+.audioBox .pro {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  width: 360px;
+  height: 30px;
+  /* background: chocolate; */
+}
+
+.pro {
+  font-weight: 200px;
+}
+
+.startTime {
+  margin-right: -15px;
+}
+
+.endTime {
+  margin-left: -15px;
+}
+
+.pro .proAudio {
+  position: relative;
+  width: 240px;
+  height: 10px;
+  margin: 0 10px;
+}
+
+.pro .proAudio .bg {
+  position: absolute;
+  top: 4px;
+  width: 240px;
+  height: 2px;
+  background: rgba(0, 0, 0, 0.5);
+}
+
+.pro .proAudio .active {
+  position: absolute;
+  top: 4px;
+  /* 这里的进度条初始值必须是8px 足够容纳小圆点 */
+  width: 8px;
+  height: 2px;
+  background: #fff;
+}
+
+/* 给小圆点空间加大一点 让用户点击不需要那么准确 */
+.pro .radioBox {
+  position: absolute;
+  right: -11px;
+  top: -14px;
+  width: 30px;
+  height: 30px;
+  /* background: saddlebrown; 
+    opacity: 0.5;*/
+  cursor: pointer;
+}
+
+.pro .proAudio span {
+  display: inline-block;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #fff;
+}
+
+@keyframes rot {
+  0% {
+    transform: rotate(0);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes rot2 {
+  0% {
+    transform: rotate(0);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+/* 随机图标  用id选择器 否则权重没有引入的css中iconfont的权重高*/
+#rand {
+  font-size: 25px;
+  line-height: 30px;
+  margin: 0 5px;
+  cursor: pointer;
+}
+
+.volumePro {
+  display: none;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  position: absolute;
+  right: 0px;
+  top: -154px;
+  width: 60px;
+  height: 150px;
+  border-radius: 10px;
+  background: #888;
+}
+
+.show {
+  display: flex;
+}
+
+.volumePro .volActive {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  transform: rotate(180deg);
+  margin-top: 10px;
+  margin-bottom: 5px;
+  width: 15px;
+  height: 110px;
+}
+
+.volumePro .bg {
+  width: 3px;
+  height: 110px;
+  background: #ccc;
+  opacity: 0.1;
+}
+
+.volActive .activeVol {
+  /* 这里需要将其脱离文档流 */
+  position: absolute;
+  width: 3px;
+  /* 让进度条一开始有个长度 也就是有音量 */
+  height: 40px;
+  background: #ff6700;
+}
+
+.volumePro .tubiao.iconfont {
+  font-size: 25px;
+  font-weight: 100;
+  color: #ff6700;
+}
+
+.volRadioBox {
+  position: absolute;
+  left: -8px;
+  bottom: -6px;
+  width: 20px;
+  height: 20px;
+  text-align: center;
+  line-height: 20px;
+  transform: rotate(180deg);
+  cursor: pointer;
+  /* background: red;
+    opacity: 0.2; */
+}
+
+.volumePro .volActive .volRadioBox span {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: #ff6700;
+}
+
+.volRadioBox .pct {
+  /* display: none; */
+  position: absolute;
+  top: 5px;
+  right: -40px;
+  width: 25px;
+  height: 25px;
+  background: #fff;
+  text-align: center;
+  line-height: 25px;
+  font-size: 12px;
+  font-weight: 100;
+  /* 字体不允许换行 */
+  white-space: nowrap;
+  opacity: 0;
+}
+
+/* 调整箭头 */
+.arrows {
+  position: absolute;
+  right: 22px;
+  bottom: -15px;
+  border-left: 8px solid transparent;
+  border-right: 8px solid transparent;
+  border-top: 15px solid #888;
+}
+
+/* 歌曲墙 */
+.bigBg {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background: #000;
+  opacity: 0.6;
+}
+
+#btnShow {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  padding: 15px 15px;
+  border-radius: 10px;
+  font-size: 30px;
+  color: #333;
+  background: #666;
+  opacity: 0.7;
+  cursor: pointer;
+}
+
+#btnShow:hover {
+  color: #ddd;
+  background: #333;
+  opacity: 0.8;
+}
+
+.albumBox {
+  position: absolute;
+  top: 100%;
+  width: 100%;
+  height: 100%;
+  color: #fff;
+  user-select: none;
+  z-index: 99;
+  /* opacity: .7; */
+}
+
+.album {
+  filter: blur(8px);
+  width: 100%;
+  height: 100%;
+}
+
+.albumBox .audioBox {
+  position: absolute;
+  bottom: 0;
+  min-width: 100%;
+  background: linear-gradient(to top, #666, #333);
+  border-radius: 0;
+}
+
+.albumBox .audioBox .bg {
+  background: #666;
+  opacity: 0.5;
+}
+
+.albumBox .audioBox .play {
+  width: 20%;
+  position: absolute;
+  left: 30%;
+  display: flex;
+  justify-content: space-around;
+}
+
+.albumBox #rand {
+  position: absolute;
+  left: 55%;
+}
+
+.albumBox .volume {
+  position: absolute;
+  left: 65%;
+}
+
+.albumBox .volumePro {
+  position: absolute;
+  left: 63.5%;
+  top: -154px;
+}
+
+.albumBox .volume .mute {
+  color: #fff;
+}
+
+.albumBox .audioBox .pro {
+  position: absolute;
+  top: 0;
+  height: 2px;
+  width: 100%;
+}
+
+.albumBox .audioBox .pro .startTime {
+  position: absolute;
+  top: -24px;
+  left: 10px;
+}
+
+.albumBox .audioBox .pro .endTime {
+  position: absolute;
+  top: -24px;
+  right: 30px;
+  ;
+}
+
+.albumBox .pro .proAudio,
+.pro .proAudio .bg {
+  width: 100%;
+  margin: 0;
+}
+
+.albumBox .pro .active {
+  width: 2px;
+}
+
+.albumBox .pro .radioBox {
+  position: absolute;
+  right: -14px;
+  /* top: -15px; */
+}
+
+.albumBox .pro .radioBox span {
+  width: 4px;
+  height: 4px;
+}
+
+.albumBox #btnHide {
+  position: absolute;
+  top: 10px;
+  right: 12px;
+  ;
+  color: #333;
+  font-size: 30px;
+  cursor: pointer;
+}
+
+.albumBox .lyr {
+  position: absolute;
+  top: 30px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 35%;
+  height: 70%;
+}
+
+.albumBox .lyr .lyrList {
+  position: absolute;
+  overflow: hidden;
+  width: 100%;
+  height: 240px;
+  top: 80px;
+}
+
+.albumBox .lyrList div {
+  position: absolute;
+}
+
+.albumBox .lyr ul li {
+  height: 40px;
+  line-height: 40px;
+  text-align: left;
+  padding-left: 100px;
+  white-space: nowrap;
+  font-size: 18px;
+}
+
+.albumBox .lyr .lyrList li {
+  opacity: 0.8;
+  font-weight: 100;
+}
+
+.albumBox .lyr .lyrName li:first-child {
+  font-weight: 800;
+  font-size: 30px;
+}
+
+.albumBox .lyr .lyrName li:nth-child(2) {
+  margin-bottom: 40px;
+  font-size: 16px;
+}
+
+.albumBox .lyr .lyrName li:nth-child(2) span {
+  color: #888;
+  font-size: 15px;
+  margin-right: 10px;
+}
+
+.albumBox .pct {
+  color: #333;
+}
+
+/* .albumBox ul li:nth-child(5){
+    border: 1px solid red;
+} */
+.albumBox .lyr .colorLyr {
+  position: absolute;
+  top: 159px;
+  left: 100px;
+  height: 40px;
+  line-height: 40px;
+  font-size: 18px;
+  font-weight: 600;
+  color: green;
+  white-space: nowrap;
+  /* width: 0;
+    overflow: hidden; */
+  clip: rect(0, 0, 40px, 0);
+}
+
+
+/* 音轨 */
+.trackSvg {
+  position: absolute;
+  bottom: 60px;
+  ;
+  left: 0;
+  width: 100%;
+  height: 50px;
+  transform: rotate(180deg);
+  overflow: hidden;
+}
+
+.trackSvg .two {
+  position: absolute;
+  top: -50px;
+}
+
+.trackSvg .two rect {
+  fill: #0f0;
+  box-shadow: -2px 2px 2px #ccc;
+  border-radius: 2px;
+  opacity: 0.6;
+}
+
+@media screen and (max-width : 1000px) {
+  .box {
+    justify-content: space-around;
+  }
+}
+
+@media screen and (max-width : 950px) {
+  .box {
+    max-width: 900px;
+    justify-content: space-between;
+    position: relative;
+  }
+
+  .songNameBox {
+    width: 300px;
+    cursor: alias
+  }
+
+  .wrapper {
+    position: absolute;
+    left: 320px;
+  }
+
+  .audioBox {
+    bottom: 10px;
+  }
+
+  .play {
+    display: flex;
+    justify-content: space-around;
+  }
+}
+
+@media screen and (max-width : 850px) {
+  body {
+    background-size: auto 1050px;
+    background-repeat: no-repeat;
+  }
+
+  .box {
+    max-width: 600px;
+    flex-direction: column;
+    align-items: center;
+
+  }
+
+  .wrapper {
+    position: relative;
+    left: 0;
+    margin: 20px auto;
+  }
+
+  #btnShow {
+    position: absolute;
+    bottom: 45%;
+  }
+
+  /* .songNameBox{
+        margin: 20 auto 0;
+    } */
+}

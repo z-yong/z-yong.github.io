@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>动画进阶版</title>
+    <style>
+        body,ul,li{
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+        .box{
+            width: 80%;
+            margin: 100px auto;
+        }
+        .box ul{
+            display: flex;
+        }
+        .box ul li{
+            position: relative;
+            border: 1px solid black;
+            border-radius: 20px;
+            width: 150px;
+            height: 200px;
+            margin: 0 10px;
+            background: #ccc;
+            overflow: hidden;
+        }
+        .box ul li img{
+            width: 150px;
+            height: 200px;
+            border-radius: 20px;
+            transform: translate(0,100%);
+            animation: move 1s ease forwards;
+        }
+        .box ul li:nth-child(1) img{
+            animation-delay: 0.1s;
+        }
+        .box ul li:nth-child(2) img{
+            animation-delay: 0.2s;
+        }
+        .box ul li:nth-child(3) img{
+            animation-delay: 0.3s;
+        }
+        .box ul li:nth-child(4) img{
+            animation-delay: 0.4s;
+        }
+        .box ul li:nth-child(5) img{
+            animation-delay: 0.5s;
+        }
+        .box ul li:nth-child(6) img{
+            animation-delay: 0.6s;
+        }
+        @keyframes move{
+            0%{
+                transform: translate(0,100%);
+            }
+            100%{
+                transform: translate(0,0);
+            }
+        }
+        .box ul li .small{
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            font-size: 14px;
+            color: #333;  
+            /* 这里注意一定要剪去溢出的部分 */
+            overflow: hidden; 
+        }
+        
+        .box ul li .state{
+            padding: 0 10px;
+            /* 注意这里的权重一定不能大于下面的权重 否则下面设置的这个属性覆盖不了这个属性*/
+            transform: translate(0,100%);
+            background: linear-gradient(to top, #222,transparent);
+        }
+
+        .box ul .inTop .state,
+        .box ul .outTop .state{
+            transform: translate(0,-100%);
+            animation: inLi 0.3s linear forwards;
+        }
+        .box ul .inRight .state,
+        .box ul .outRight .state{
+            transform: translate(100%,0);
+            animation: inLi 0.3s linear forwards;
+        }
+        .box ul .inBottom .state,
+        .box ul .outBottom .state{
+            transform: translate(0,100%);
+            animation: inLi 0.3s linear forwards;
+        }
+        .box ul .inLeft .state,
+        .box ul .outLeft .state{
+            transform: translate(-100%,0);
+            animation: inLi 0.3s linear forwards;
+        }
+        @keyframes inLi{
+            /* 这里初始位置就是当前位置 所以不用再写 */
+            100%{
+                transform: translate(0,0)
+            }
+        }
+        /* 因为此时小方块初始位置就在上下左右四边 所以不需要设置animation-fill-mode */
+        .box ul .outTop .state{
+            animation: outTop 0.3s linear;
+        }
+        .box ul .outRight .state{
+            animation: outRight 0.3s linear;
+        }
+        .box ul .outBottom .state{
+            animation: outBottom 0.3s linear;
+        }
+        .box ul .outLeft .state{
+            animation: outLeft 0.3s linear;
+        }
+        @keyframes outTop{
+            0%{
+                transform: translate(0,0);
+            }
+            100%{
+                transform: translate(0,-100%)
+            }
+        }
+        @keyframes outRight{
+            0%{
+                transform: translate(0,0);
+            }
+            100%{
+                transform: translate(100%,0)
+            }
+        }
+        @keyframes outBottom{
+            0%{
+                transform: translate(0,0);
+            }
+            100%{
+                transform: translate(0,100%)
+            }
+        }
+        @keyframes outLeft{
+            0%{
+                transform: translate(0,0);
+            }
+            100%{
+                transform: translate(-100%,0)
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="box">
+        <ul>
+            <li>
+                <img src="./img/a.jpg" alt="">
+                <div class="small">
+                    <div class="state"><span>我是第1张图片我是第1张图片</span></div>
+                </div>
+            </li>
+            <li>
+                <img src="./img/b.jpg" alt="">
+                <div class="small">
+                    <div class="state"><span>我是第2张图片我是第2张图片</span></div>
+                </div>
+            </li>
+            <li>
+                <img src="./img/c.jpg" alt="">
+                <div class="small">
+                    <div class="state"><span>我是第3张图片我是第3张图片</span></div>
+                </div>
+            </li>
+            <li>
+                <img src="./img/d.jpg" alt="">
+                <div class="small">
+                    <div class="state"><span>我是第4张图片我是第4张图片</span></div>
+                </div>
+            </li>
+            <li>
+                <img src="./img/e.jpg" alt="">
+                <div class="small">
+                    <div class="state"><span>我是第5张图片我是第5张图片</span></div>
+                </div>
+            </li>
+            <li>
+                <img src="./img/f.jpg" alt="">
+                <div class="small">
+                    <div class="state"><span>我是第6张图片我是第6张图片</span></div>
+                </div>
+            </li>
+        </ul>
+    </div>
+    <script>
+        var oLi = document.getElementsByTagName("li");
+        var len = oLi.length;
+        for(var i = 0; i < len; i ++){
+            oLi[i].addEventListener('mouseenter',function(e){
+                this.className = '';
+                var num = getDirection(e,this);
+                switch(num){
+                    case 0:
+                        this.className = 'inTop';
+                        break;
+                    case 1:
+                        this.className = 'inRight';
+                        break;
+                    case 2:
+                        this.className = 'inBottom';
+                        break;
+                    case 3:
+                        this.className = 'inLeft';
+                        break;
+                }
+            })
+            
+            oLi[i].addEventListener('mouseleave',function(e){
+                this.className = '';
+                var num = getDirection(e,this);
+                console.log(num)
+                switch(num){
+                    case 0:
+                        this.className = 'outTop';
+                        break;
+                    case 1:
+                        this.className = 'outRight';
+                        break;
+                    case 2:
+                        this.className = 'outBottom';
+                        break;
+                    case 3:
+                        this.className = 'outLeft';
+                        break;
+                }
+            })
+        }
+
+
+        function getDirection(e,elem){
+            var w = elem.offsetWidth;
+            var h = elem.offsetHeight;
+            // e.offsetX是鼠标距离li元素左顶点的坐标 当li元素是正方形时减去自身宽度一半就可以把中心点挪到li元素的中心位置
+            // 当元素是长方形时 需要进行判断 将其中心点位置减小至正方形的中心点
+            var x = (e.offsetX - w/2)*(w > h ? h/w : 1);
+            var y = (e.offsetY - h/2)*(h > w ? w/h : 1);
+            // 先将坐标转化为弧度 在转化为角度值 因为角度值是-180到180 存在负值不方便换算 所以加上180 变成0到360
+            // 因为最终目的是确认鼠标究竟从何处移入或者移出 有四个方向 角度值分别在
+            // 上边[45-135) 右边[135-225) 下边[225-315) 左边[315-360),[0-45)之间
+            // 除以90 将数值缩小 然后进行四舍五入 得到的就是 上：1 右：2 下：3 左：4,0
+            // 由于左边存在两个数 所以可以进行+3 再对4取模 得到的就是：上：0 右：1 下：2 左：3
+            return (Math.round((Math.atan2(y,x)*(180/Math.PI)+180)/90)+3)%4;
+        }
+    </script>
+</body>
+</html>

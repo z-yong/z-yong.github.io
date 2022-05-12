@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>添加调序删除元素</title>
+    <style>
+        body,ul,li{
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+        .wrapper{
+            width: 500px;
+            margin: 0 auto;
+        }
+        li{
+            height: 40px;
+            background: #ccc;
+            margin: 10px 0;
+            line-height: 40px;
+        }
+        li.color{
+            background: red;
+        }
+        .add,.clear,.ret,.delete{
+            width: 70px;
+            height: 30px;
+        }
+        .box{
+            display: none;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            margin-top: -50px;
+            margin-left: -150px;
+            width: 300px;
+            height: 100px;
+            border: 1px solid black;
+            background: #fff;
+        }
+        .smallBox{
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            text-align: center;
+            transform: translate(-50%,-50%);
+        }
+        span{
+            white-space: nowrap;
+        }
+        .text{
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: nowrap;
+        }
+    </style>
+</head>
+<body>
+    <div class="wrapper">
+        <h3>我不花里胡哨 但是我功能强大</h3>
+        <ul>
+            <li draggable = 'true'>我是一号 你可以拖拽我调整顺序哦 点击我的话有可能我会消失哦</li>
+            <li draggable = 'true'>我是二号 你可以拖拽我调整顺序 点击我的话有可能我会消失哦</li>
+            <li draggable = 'true'>我是三号 你可以拖拽我调整顺序 点击我的话有可能我会消失</li>
+            <li draggable = 'true'>我是四号 你可以拖拽我调整顺序 点击我的话有可能会消失</li>
+        </ul>
+        <button class="add">加一个</button>
+        <button class="delete">选中删除</button>
+        <button class="ret">返回</button>
+        <button class="clear">清除</button>
+    </div>
+    <div class="box">
+        <div class="smallBox">
+            <span>请输入您需要添加的内容</span>
+            <div class="text">
+                <input type="text">
+                <button class="ok">ok</button>
+            </div>
+        </div>
+    </div>
+    <script src="./jquery-3.4.1.min.js"></script>
+    <script>
+        var eleArr = [];
+        $('.add').on('click',function(){
+            $('.box').css('display','block')
+        }).next().on('click',function(){
+            var ele = $('.color').remove();
+            // 将删除的值存储下来 这里添加的是一个数组
+            eleArr.push(ele);
+        }).next().on('click',function(){
+            for(var i = 0; i < eleArr.length; i ++){
+                $('ul').append(eleArr[i]);
+            }
+            // 当数组长度为0时清空该数组 以免占用内存
+            if(eleArr.length > 3){
+                eleArr.splice(0,eleArr.length)
+            }
+            console.log(eleArr)
+        }).next().on("click",function(){
+            // 将清除的元素加进去 这里添加的是一个数组
+            eleArr.push($('li').remove());
+        })
+        $('.ok').click(function(){
+            $('<li draggable = "true" > ' + $('input').val() + '</li>').appendTo($('ul'))
+            $(".box").css('display','none')
+        })
+
+        // 这里必须用这种绑定事件方法 因为需要进行事件委托 否则新增的元素就不会有事件监听
+        $('ul').on('click','li',function(){
+            $(this).toggleClass('color')
+        })
+        
+        var ul = document.getElementsByTagName('ul')[0]
+        var li = document.getElementsByTagName('li');
+        // 这里同样需要事件委托
+        ul.addEventListener('dragstart',function(e){
+                var dt = e.dataTransfer;
+                var index = seek( li , e.target)
+                // 当前拖拽子元素
+                console.log(e.target)
+                dt.setData('drag',index);
+            })
+        ul.addEventListener('dragover',function(e){
+                e.preventDefault();
+            })
+        ul.addEventListener('drop',function(e){
+                var dt = e.dataTransfer;
+                var index = dt.getData('drag');
+                $(e.target).before(li[index]);
+            })
+
+        function seek(arr,ele){
+            for(var i = 0; i < li.length; i++){
+                if(li[i] == ele){
+                    return i
+                }
+            }
+        }
+    </script>
+</body>
+</html>

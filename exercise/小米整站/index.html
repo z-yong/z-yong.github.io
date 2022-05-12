@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <title>小米首页</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/index.css">
+    <link rel="stylesheet" href="css/iconfont.css">
+</head>
+<body>
+    <div class="hero">
+        <div class="container hero-container">
+            <div class="hero-banner">
+                <div class="banner-ui">
+                </div>
+                <div class="banner-control">
+                    <div class="control-page">
+                    </div>
+                    <div class="control-rl">
+                        <a href="#" class="rl-prev">上一张</a>
+                        <a href="#" class="rl-next">下一张</a>
+                    </div>
+                </div>
+            </div>
+            <div class="hero-sub clearfix">
+                <div class="sub-tool">
+                    <ul class="clearfix">
+                        <li><a href="#"><i class="iconfont">&#xe908;</i>选购手机</a></li>
+                        <li><a href="#"><i class="iconfont">&#xe905;</i>企业团购</a></li>
+                        <li><a href="#"><i class="iconfont">&#xe902;</i>F码通道</a></li>
+                        <li><a href="#"><i class="iconfont">&#xe906;</i>米粉卡</a></li>
+                        <li><a href="#"><i class="iconfont">&#xe904;</i>以旧换新</a></li>
+                        <li><a href="#"><i class="iconfont">&#xe907;</i>话费充值</a></li>
+                    </ul>
+                </div>
+                <div class="sub-promo">
+                    <ul>
+                        <li class="first"><a href="#"><img src="img/promo1.jpg" alt=""></a></li>
+                        <li><a href="#"><img src="img/promo2.jpg" alt=""></a></li>
+                        <li><a href="#"><img src="img/promo3.jpg" alt=""></a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="main">
+        <div class="container">
+            <div class="main-hd">
+                <h2></h2>
+            </div>
+            <div class="main-bd clearfix">
+                <div class="bd-ad">
+                    <ul class="clearfix">
+                        <li><a href="#"><img src="" alt=""></a></li>
+                    </ul>
+                </div>
+                <div class="bd-product clearfix">
+                    <ul class="clearfix">
+                        <li class="tpl-body-item">
+                            <div>
+                                <div class="face"><a href="#"><img src="" alt=""></a></div>
+                                <h3 class="title"><a href="#"></a></h3>
+                                <p class="desc"></p>
+                                <p class="price">
+                                    <span class="num"></span>元
+                                    <del><span class="num"></span>元</del>
+                                </p>
+                                <div class="flag"></div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+<script src="js/api.js"></script>
+<script src="js/header.js"></script>
+<script>
+    // 轮播图
+   $.apiGet('/menu?type=carousel').then(function(data){
+       data.forEach(function(ele,index){
+        //    str += `<a href=${ele.url}><img src=${ele.img}/></a>`
+        $('<a>').attr('href',ele.url).append(
+                $('<img>').attr('src',ele.img)
+        ).appendTo($('.banner-ui'))
+        $('<a>').text(index).appendTo($(".control-page"))
+       })
+       //    默认第一张显示
+       let index = 0;
+       let timer;
+       $('.banner-ui').find('a').eq(0).addClass('show');
+       $(".control-page a").eq(0).addClass('active');
+       
+       $('.rl-prev').on("click",function(){
+           $('.banner-ui a').removeClass('show');
+           $(".control-page a").removeClass('active');
+           index --;
+           if(index < 0){
+                index = 4
+           }
+           $('.banner-ui a').eq(index).addClass('show');
+           $('.control-page a').eq(index).addClass('active')
+       });
+       $('.rl-next').on("click",function(){
+           next()
+       })
+       function next(){
+            $('.banner-ui a').removeClass('show');
+            $(".control-page a").removeClass('active');
+            index ++;
+            if(index > 4){
+                    index = 0
+            }
+            $('.banner-ui a').eq(index).addClass('show');
+            $('.control-page a').eq(index).addClass('active')
+       }
+       $('.control-page').on('click','a',function(){
+           index = $(this).index();
+            $('.banner-ui a').removeClass('show');
+            $(".control-page a").removeClass('active');
+            $('.banner-ui a').eq(index).addClass('show')
+            $(this).addClass('active');
+       })
+    //    自动
+       self()
+        function self(){
+           timer = setInterval(next,3000)
+       }
+       $('.hero-banner').on('mouserleave',self)
+       $('.hero-banner').on('mouseenter',function(){
+           clearInterval(timer)
+       })
+   })
+
+//    `<div class="main-hd">
+//         <h2></h2>
+//     </div>
+//     <div class="main-bd clearfix">
+//         <div class="bd-ad">
+//             <ul class="clearfix">
+//                 <li><a href="#"><img src="" alt=""></a></li>
+//             </ul>
+//         </div>
+//         <div class="bd-product clearfix">
+//             <ul class="clearfix">
+//                 <li class="tpl-body-item">
+//                     <div>
+//                         <div class="face"><a href="#"><img src="" alt=""></a></div>
+//                         <h3 class="title"><a href="#"></a></h3>
+//                         <p class="desc"></p>
+//                         <p class="price">
+//                             <span class="num"></span>元
+//                             <del><span class="num"></span>元</del>
+//                         </p>
+//                         <div class="flag"></div>
+//                     </div>
+//                 </li>
+//             </ul>
+//         </div>
+//     </div>`
+// 主推产品
+const box = $('.main .container')
+const hd = $('.main .container').find('.main-hd').remove();
+const bd = $('.main .main-bd').remove();
+// const oLi = $('.main .bd-product').find('.clearfix').remove();
+$.apiGet('/menu?type=index').then(function(data){  
+    data.forEach(function(ele,index){
+        let str = '';
+        console.log(ele)
+        hd.find('h2').text(ele.name);
+        bd.find('.bd-ad ul').html(`<li><a href="${ele.url}"><img src="${ele.img}" alt=""></a></li>`); 
+        bd.find('.bd-product ul').html('')      
+        if(ele.list){
+           ele.list.forEach(function(item,i){
+                    str += `<li class="tpl-body-item">
+                                <div>
+                                    <div class="face"><a href="${$.productLink(item.pid)}"><img src="${item.img}" alt=""></a></div>
+                                    <h3 class="title"><a href="${$.productLink(item.pid)}">${item.name}</a></h3>
+                                    <p class="desc">${item.desc}</p>
+                                    <p class="price">
+                                        <span class="num">${item.price}</span>元
+                                        <del><span class="num">${item.market_price}</span>元</del>
+                                    </p>
+                                    <div class="flag" style='background:${item.flagcolor}'>${item.flag}</div>
+                                </div>
+                            </li>`
+           })
+           bd.find('.bd-product ul').html(str);
+        }
+        // 这里需要用到克隆 否则重复的元素会覆盖 
+        box.append(hd.clone());
+        box.append(bd.clone());
+
+    })
+})
+
+
+</script>
+</body>
+</html>

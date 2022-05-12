@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>飘窗广告</title>
+    <style>
+        body{
+            position: absolute;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            overflow: hidden;
+            margin: 0;
+            padding: 0;
+        }
+        .box{
+            width: 260px;
+            height: 180px;
+            position: absolute;
+            top: -180px;
+            left: -260px;
+        }
+        .box img:first-child{
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 260px;
+            height: 180px;
+        }
+        .box img:last-child{
+            position: absolute;
+            top: 0;
+            right: 0;
+        }
+        .ceshi{
+            height: 1800px;
+        }
+        .cc{
+            width: 100px;
+            height: 100px;
+            background: red;
+            position: absolute;
+            top: 1000px;
+            z-index: 100;
+        }
+    </style>
+</head>
+<body>
+    <div class="cc"></div>
+    <iframe src="https://www.baidu.com" frameborder="0" width="100%" height="100%"></iframe>
+    <div class="box">
+        <a href='https://www.jd.com' target="_blank"><img src="./img/0.jpg" alt=""></a>
+        <img class="close" src="./img/close.jpg" alt="">
+    </div>
+    <div class="ceshi">点击XX关闭哦</div>
+    <script src="./jquery-3.4.1.min.js"></script>
+    <script>
+        var box = document.getElementsByClassName("box")[0];
+        var close = document.getElementsByClassName("close")[0];
+        const aaa = document.getElementsByClassName('cc')[0]
+
+        close.onclick = function(){
+            window.open('https://www.jd.com')
+            box.style.display = 'none';
+        }
+
+        window.addEventListener('load',start,false)
+        box.onmouseenter = stop;
+        box.onmouseleave = start;
+
+        function start(){
+            timer  = setInterval(move,10);
+        }
+        function stop(){
+            clearInterval(timer)
+        }
+
+        var leftSpeed = 1;
+        var topSpeed = 1;
+        var newTop = box.getBoundingClientRect().top;
+        var newLeft = box.getBoundingClientRect().left;
+
+        function move(e){
+            // 获取当前滚动条高度及宽度
+            var scLeft = document.documentElement.scrollLeft;
+            var scTop = document.documentElement.scrollTop;
+            newLeft += leftSpeed;
+            newTop += topSpeed;
+            box.style.left = newLeft + scLeft + 'px';
+            box.style.top = newTop + scTop + 'px';
+            
+            //这里不能写当前的box.offsetTop值 因为当用户滚动时top值也会发生改变 幅度可能很大 而newTop是固定的恒加或者恒减的 下面的if判断也一样
+            if(newTop <= 0){ 
+                topSpeed = 1;
+            }
+            if(newLeft <= 0){
+                leftSpeed = 1;
+            }
+            if(newTop >= document.documentElement.clientHeight - box.offsetHeight){
+                topSpeed = -1;
+            }
+            if(newLeft >= document.documentElement.clientWidth - box.offsetWidth){
+                leftSpeed = -1;
+            }
+        }
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,566 @@
+/* body{
+    height: 2000px;
+} */
+
+body,ul,li,dl,dt,dd{
+    margin: 0;
+    padding: 0;
+}
+.topbar{
+    height: 40px;
+    background: #333;
+}
+a{
+    text-decoration: none;
+}
+.menu{
+    width: 1226px;
+    height: 40px;
+    margin: auto;
+    font-size: 0;
+}
+.menu .tool{
+    float: left;
+}
+.menu .shop, .menu .info{
+    float: right;
+}
+.tool a, .info a{
+    display: inline-block;
+    font: 12px "Helvetica Neue",Helvetica,Arial,"Microsoft Yahei","Hiragino Sans GB","Heiti SC","WenQuanYi Micro Hei",sans-serif;
+    color: #b0b0b0;
+    height: 40px;
+    line-height: 40px;
+}
+.tool a:hover, .info a:hover{
+    color:#fff;
+}
+
+.shop .iconfont{
+    margin-right: 2px;
+    vertical-align: -2px;
+}
+
+.tool span, .info span{
+    font-size: 12px;
+    color: #424242;
+    margin: 0.4em;
+}
+.info .word{
+    margin-right: 25px;
+}
+.shop a{
+    display: block;
+    background: #424242;
+    font: 12px "Helvetica Neue",Helvetica,Arial,"Microsoft Yahei","Hiragino Sans GB","Heiti SC","WenQuanYi Micro Hei",sans-serif;
+    color: #b0b0b0;
+    width: 120px;
+    height: 40px;
+    line-height: 40px;
+    text-align: center;
+}
+.shop a:hover{
+    background: #fff;
+    color: #ff6700;
+}
+.menu::before, .menu::after,
+.genre::before, .genre::after{
+    content: "";
+    display: table;
+}
+.menu::after, .genre::after{
+    clear: both;
+}
+
+
+.nav{
+    height: 100px;
+}
+.genre{
+    width: 1226px;
+    height: 100px;
+    margin: 0 auto;
+    position: relative;
+}
+.genre .logo{
+    float: left;
+    width: 62px;
+    height: 55px;
+    margin-top: 22px;
+}
+.logo .a{
+    display: block;
+    background: #ff6700 url('../img/mi-logo.png') no-repeat ;
+    width: 55px;
+    height: 55px;
+}
+.genre .gen{
+    float: left;
+    width: 820px;
+    height: 100px;
+}
+ul{
+    list-style-type: none;
+}
+.gen ul .item{
+    float: left;
+    height: 100px;
+    line-height: 100px;
+}
+.gen ul .item a{
+    display: block;
+    color: #333;
+    padding: 0 10px;
+}
+.gen ul .item a:hover{
+    color: #ff6700;
+}
+.gen ul .item .aa{
+    display: block;
+    padding-left: 60px;
+}
+/* 二级 */
+.gen #pp{
+    display: block;
+}
+.gen .pro{
+    display: none;
+    padding: 20px 0;
+    position: absolute;
+    left: 0;
+    z-index: 2;
+    border: 1px solid red;
+    background: #fff;
+    width: 234px;
+}
+.gen .pro-ul li{ 
+    font-size: 14px;
+    line-height: 42px;
+}
+.gen .pro-ul li a{
+    display: block;
+    padding-left: 30px;
+}
+.gen .pro-ul li a:hover{
+   background: #ff6700;
+   color: #fff;
+}
+.gen .pro-ul li a i{
+    position: absolute;
+    right: 15px;
+}
+.gen ul .item .aa:hover{
+    color: #333;
+}
+
+
+.genre .seek{
+    float: right;
+    width: 297px;
+    height: 50px;
+    margin-top: 25px;
+}
+.seek .form{
+    display: block;
+    width: 300px;
+    height: 50px;
+    position: relative;
+}
+.seek .search{
+    display: block;
+    font-size: 20px;
+    width: 245px;
+    height: 50px;
+    border: 1px solid #e0e0e0;
+    color: #616161;
+    outline: 0;
+    padding: 0 10px;
+}
+.seek .submit{
+    display: block;
+    width: 52px;
+    height: 50px;
+    border: 1px solid #e0e0e0;
+    background: #fff;
+    position: absolute;
+    left: 245px;
+    top: 0px;
+    /* 不显示默认边框 */
+    outline: 0;
+}
+.seek .search:hover{
+    border: 1px solid #b0b0b0;
+}
+.seek .search:active{
+    border: 1px solid #ff6700;
+}
+.seek .submit:hover{
+    color: #fff;
+    border: 1px solid #b0b0b0;
+    background: #ff6700;
+}
+.back{
+    margin-top: 19px;
+    background-color: #f5f5f5;
+}
+.back .img{
+    display: block;
+    height: 170px;
+    background: #f5f5f5 url(../img/image/seckill-head.jpg) no-repeat 50% 0;
+    text-indent: -99999px;
+}
+.back .aaaa{
+    width: 1226px;
+    margin: 0 auto;
+}
+.hint{
+    background: #333 ;
+    margin: -68px 0 0;
+}
+.hint2{
+    position: fixed;
+    top: 68px;
+    width: 1226px;
+    z-index: 99;
+    /* opacity: 1.0; 设置透明度 */
+}
+.hint ul li{  
+    float: left;
+    color: #fff;
+    width: 20%;
+    text-align: center;
+    height: 68px;
+    line-height: 68px;
+    cursor: pointer;
+}
+.hint ul::before{
+    content: "";
+    display: table;
+}
+.hint ul::after{
+    content: "";
+    display: table;
+    clear: both;
+}
+.hint ul li .sp{
+    font: 18px "Helvetica Neue",Helvetica,Arial,"Microsoft Yahei","Hiragino Sans GB","Heiti SC","WenQuanYi Micro Hei",sans-serif;
+    margin-left: 25px;
+}
+.hint ul li .sp0{
+    display: inline-block;
+    font: 14px "Helvetica Neue",Helvetica,Arial,"Microsoft Yahei","Hiragino Sans GB","Heiti SC","WenQuanYi Micro Hei",sans-serif;
+    vertical-align: middle;
+    line-height: 20px;
+    text-align: justify;
+    margin-left: 15px;
+}
+
+.hint ul .time1{
+    background: #f1393a;
+}
+.hint ul li .sp1{
+    font: 18px "Helvetica Neue",Helvetica,Arial,"Microsoft Yahei","Hiragino Sans GB","Heiti SC","WenQuanYi Micro Hei",sans-serif;;
+    margin-left: 30px;
+}
+
+.hint ul li .sp2{
+    margin-left: 15px;
+    font: 14px "Helvetica Neue",Helvetica,Arial,"Microsoft Yahei","Hiragino Sans GB","Heiti SC","WenQuanYi Micro Hei",sans-serif;
+}
+.commodity{
+    width: 1226px;
+    margin: 18px auto;
+}
+.commodity ul{
+    margin-right: -13px;
+    display: none;
+}
+.commodity .show{
+    display: block;
+}
+.module{
+    width: 400px;
+    height: 190px;
+    float: left;
+    background-color: #fff;
+    margin-right: 13px;
+    margin-bottom: 13px;
+}
+.module .a{
+    height: 190px;
+    width: 190px;
+}
+.module .a img{
+    height: 190px;
+}
+ .comm{
+    display: inline-block;
+    height: 190px;
+    width: 190px;
+    text-indent: 8px;
+    position: relative;
+    font-family:  "Helvetica Neue",Helvetica,Arial,"Microsoft Yahei","Hiragino Sans GB","Heiti SC","WenQuanYi Micro Hei",sans-serif;
+}
+.comm .commod{ 
+    display: inline-block;
+    height: 190px;
+    width: 190px;
+    padding-bottom: 10px;
+    position: absolute;
+    top: 22px;
+    z-index: 1;
+    /* margin-bottom: 20px; */
+}
+.module .comm .commod .sp1{
+    display: block;
+    color: #333;
+    font-size: 16px;
+    height: 16px;
+    line-height: 16px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    margin-top: 10px;
+}
+.module .comm .p2{
+    color: #757575;
+    font-size: 12px;
+    height: 25px;
+    line-height: 16px;
+    margin-top: 7px; 
+}
+.module .comm .p3{
+    color: #f1393a;
+    font-size: 16px;
+}
+.module .comm .p3 span{
+    display: inline-block;
+    margin-left: 15px;
+    text-decoration: line-through;
+    color: #757575;
+    font-size: 12px;
+}
+.module .comm .submit{
+    display: block;
+    color: #fff;
+    background: #83c441;
+    font-size: 14px;
+    width: 118px;
+    height: 28px;
+    line-height: 28px;
+    margin-left: 9px;
+    text-indent: 0;
+    border:1px solid #83c441;
+    text-align: center;
+}
+.module .comm .sp4{
+    display: inline-block;
+    color: #757575;
+    font-size: 12px;
+    line-height: 12px;
+    margin-top: 10px;
+}
+
+.commodity ul::before{
+    content: "";
+    display: table;
+}
+.commodity ul::after{
+    content: "";
+    display: table;
+    clear: both;
+}
+.text{
+    width: 1226px;
+    margin: 100px auto 0;
+    padding-bottom: 35px;
+}
+.text p{
+    font-size: 12px;
+    color: #999;
+}
+.after{
+    background:#fff;
+    /* height: 500px; */
+}
+.after .after-first{
+    width: 1226px;
+    margin: 0 auto;
+}
+.after .after-first .afte{
+    padding-top: 27px;
+    padding-bottom: 54px;
+    font: 16px "Helvetica Neue",Helvetica,Arial,"Microsoft Yahei","Hiragino Sans GB","Heiti SC","WenQuanYi Micro Hei",sans-serif;
+    border-bottom: 1px solid #e0e0e0;
+}
+.after .after-first .afte .sale li{
+    float: left;
+    width: 19.8%;
+    height: 25px; 
+    border-left: 1px solid #e0e0e0;
+    line-height: 25px;
+    text-align: center;
+}
+.after .after-first .afte .sale .li1{
+    border: 0;
+}
+.after .sale li a{
+    color: #616161;
+}
+.after .sale li i{
+    font-style: normal;
+    font-size: 24px;
+    vertical-align: -2px;
+    margin-right: 6px;
+}
+.after .after-first .sale a:hover{
+    color: #ff6700;
+}
+.after .after-first .sale::before{
+    content: "";
+}
+.after .after-first .sale::after{
+    content: "";
+    clear: both;
+}
+
+.after .after-first .divdl{
+    padding: 40px 0;
+    height: 120px;
+}
+.after-first dl{
+    float: left;
+    width: 160px;
+}
+.after-first .divdl::before{
+    content: "";
+}
+.after-first .divdl::after{
+    content: "";
+    clear: both;
+}
+.after-first dl dt{
+    font: 14px "Helvetica Neue",Helvetica,Arial,"Microsoft Yahei","Hiragino Sans GB","Heiti SC","WenQuanYi Micro Hei",sans-serif;
+    color: #424242;
+    margin-bottom: 26px;
+}
+.after-first dl dd{
+    margin-top: 5px;
+}
+.after-first dl dd a{
+    font: 12px "Helvetica Neue",Helvetica,Arial,"Microsoft Yahei","Hiragino Sans GB","Heiti SC","WenQuanYi Micro Hei",sans-serif;
+    color: #757575;
+}
+.after-first dl dd a:hover{
+    color: #ff6700;
+}
+.after-first .phone{
+    float: right;
+    border-left: 1px solid #e0e0e0;
+    width: 20.6%;
+    height: 118px;
+    text-align: center;
+}
+.phone .p1{
+    font: 22px "Helvetica Neue",Helvetica,Arial,"Microsoft Yahei","Hiragino Sans GB","Heiti SC","WenQuanYi Micro Hei",sans-serif;
+    color: #ff6700;
+    margin: 0 0 5px;
+}
+.phone .p2{
+    font: 12px "Helvetica Neue",Helvetica,Arial,"Microsoft Yahei","Hiragino Sans GB","Heiti SC","WenQuanYi Micro Hei",sans-serif;
+    color: #616161;
+    margin: 0 0 16px;
+}
+.phone a{
+    display:inline-block;
+    width: 118px;
+    height: 28px;
+    font: 12px "Helvetica Neue",Helvetica,Arial,"Microsoft Yahei","Hiragino Sans GB","Heiti SC","WenQuanYi Micro Hei",sans-serif;
+    line-height: 28px;
+    color: #ff6700;
+    background: #fff;
+    text-align: center;
+    border: 1px solid #ff6700;
+}
+.phone a i{
+    vertical-align: -1px;
+}
+.phone a:hover{
+    background: #ff6700;
+    color: #fff;
+}
+
+
+.finally{
+    background: #f5f5f5;
+    padding: 30px 0;
+}
+.finally .finally-final{
+    width: 1226px;
+    margin: 0 auto;
+}
+.final-one .img{
+    float: left;
+    margin-right: 10px;
+}
+.final-one .img a{
+    display: block;
+    width: 57px;
+    height: 57px;
+    background: #ff6700 url(../img/mi-logo.png) no-repeat 50% 50%;
+    text-indent: -99999px;
+}
+.final-one .consult{
+    float: left;
+    font: 12px "Helvetica Neue",Helvetica,Arial,"Microsoft Yahei","Hiragino Sans GB","Heiti SC","WenQuanYi Micro Hei",sans-serif;
+    height: 18px;
+    line-height: 18px;
+}
+.final-one .consult-one {
+    font-size: 0;
+}
+.final-one .consult a{
+    font-size: 12px;
+    color: #757575;
+}
+.final-one .consult a:hover{
+    color: #ff6700;
+}
+.final-one .consult-one span{
+    color: #b0b0b0;
+    font-size: 12px;
+    margin: 0.25em;
+}
+.final-one .consult-two{
+    color: #b0b0b0;
+}
+.final-one .consult-two a{
+    color: #b0b0b0;
+}
+
+.final-one .partner{
+    display: block;
+    padding-top: 40px;
+}
+.final-one .partner .a1{
+    padding-left: 67px;
+}
+.final-one .partner a img{
+    height: 28px;
+    width: auto;
+}
+.final-one .aaa::before{
+    content: "";
+    display: table;
+}
+.final-one .aaa::after{
+    content: "";
+    display: table;
+    clear: both;
+}
+.final-two{
+    font: 20px "楷体";
+    color: #b0b0b0;
+    text-align: center;
+    margin-top: 30px;
+}
